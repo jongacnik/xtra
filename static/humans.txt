@@ -1,0 +1,12 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Name -- Role -- github: Username
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    Gacnik BP, jQuery, Modernizr
+    Davis JS

@@ -1,0 +1,68 @@
+/**
+ * Global Reset of all HTML Elements
+ */
+html, body {
+	border: 0;
+	font-family: "Times New Roman", Times, serif;
+	line-height: 1.2;
+	margin: 0;
+	padding: 0;
+}
+
+div, span, object, iframe, img, table, caption, thead, tbody,
+tfoot, tr, tr, td, article, aside, canvas, details, figure, hgroup, menu,
+nav, footer, header, section, summary, mark, audio, video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cit, code,
+del, dfn, em, ins, q, samp, small, strong, sub, sup, b, i, hr, dl, dt, dd,
+ol, ul, li, fieldset, legend, label {
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+	display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  caption, th, td {
+    text-align: left;
+    vertical-align: middle;
+  }
+}
+
+a img {
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}
+
+/**
+ * Custom Boilerplate snippets
+ */
+html {
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%; 
+	-ms-text-size-adjust: 100%;
+}
+img { -ms-interpolation-mode: bicubic; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+svg:not(:root) { overflow: hidden; }
+@media print {
+	p, h2, h3 { orphans: 3; widows: 3; }
+	img { max-width: 100% !important; }
+}

@@ -1,0 +1,114 @@
+.box-sizing (@type: border-box) {
+	-webkit-box-sizing: @type; *behavior: url(/_css/boxsizing.htc);
+	-moz-box-sizing:    @type; *behavior: url(/_css/boxsizing.htc);
+	box-sizing:         @type; *behavior: url(/_css/boxsizing.htc);
+}
+.table(){
+	display: table; *behavior: url(/_css/display-table.min.htc);
+}
+.table-cell(){
+	display: table-cell;
+	-dt-display: table-cell;
+}
+.font-size(@sizeValue) {
+	@remValue: @sizeValue * 0.0625;
+	@pxValue: (@remValue * 16);
+	font-size: ~"@{pxValue}px";
+	font-size: ~"@{remValue}rem";
+}
+.line-height(@sizeValue) {
+	@remValue: @sizeValue * 0.0625;
+	@pxValue: (@remValue * 16);
+	line-height: ~"@{pxValue}px";
+	line-height: ~"@{remValue}rem";
+}
+.times(){
+	font-family: 'times_bq', 'times new roman', times, serif;
+}
+.century(){
+	font-family: Century Gothic, 'century_gothic', Arial, sans-serif; 
+	font-weight: bold; 
+	text-transform: uppercase;
+}
+.gothic(){
+	font-family: 'gothic_720', Arial, sans-serif;
+}
+.decennie(){
+	font-family: 'decennieexpressjyosf', times, serif; 
+	font-weight: bold;
+}
+.opacity (@opacity : 0.5) {
+	-webkit-opacity: @opacity;
+	-moz-opacity: @opacity;
+	opacity: @opacity;
+}
+.columns(@count : 3, @gap : 10) {
+	-webkit-column-count: @count;
+	-moz-column-count: @count;
+	column-count: @count;
+	-webkit-column-gap: @gap;
+	-moz-column-gap: @gap;
+	column-gap: @gap;
+}
+.animate (@what, @speed : 0.5s){
+	-webkit-transition: @what @speed ease-in-out;
+	-moz-transition: @what @speed ease-in-out;
+	-o-transition: @what @speed ease-in-out;
+	-ms-transition: @what @speed ease-in-out;
+	transition: @what @speed ease-in-out;
+}
+.rotation(@deg:5deg){
+	transform: rotate(@deg);
+	-webkit-transform: rotate(@deg);
+	-moz-transform: rotate(@deg);
+	-ms-transform: rotate(@deg);
+	-o-transform: rotate(@deg);
+}
+.bgGlyph(@png, @svg){
+	background: transparent url("@{png}") center center no-repeat;
+	background-image: -webkit-linear-gradient(transparent, transparent), url("@{svg}");
+	background-image: -moz-linear-gradient(transparent, transparent), url("@{svg}");
+	background-image: linear-gradient(transparent, transparent), url("@{svg}");
+}
+.animation (@name, @duration: 4s, @count: infinite, @delay: 0s, @ease: linear) {
+	-webkit-animation: @name @duration @count @delay @ease;
+	-moz-animation:    @name @duration @count @delay @ease;
+	-o-animation:      @name @duration @count @delay @ease;
+	-ms-animation:     @name @duration @count @delay @ease;
+}
+@-webkit-keyframes rotate {
+ from { -webkit-transform: rotate(0deg); }
+ to { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes rotate {
+ from { -moz-transform: rotate(0deg); }
+ to { -moz-transform: rotate(360deg); }
+}
+@-o-keyframes rotate {
+ from { -o-transform: rotate(0deg); }
+ to { -o-transform: rotate(360deg); }
+}
+@keyframes rotate {
+ from { transform: rotate(0deg); }
+ to { transform: rotate(360deg); }
+}
+@-webkit-keyframes flash {
+    0%   { background-color: #fff }
+    50%  { background-color: #000 }
+    100%  { background-color: #fff }
+}
+@-moz-keyframes flash {
+    0%   { background-color: #fff }
+    50%  { background-color: #000 }
+    100%  { background-color: #fff }
+}
+@-o-keyframes flash {
+    0%   { background-color: #fff }
+    50%  { background-color: #000 }
+    100%  { background-color: #fff }
+}
+@keyframes flash {
+    0%   { background-color: #fff }
+    50%  { background-color: #000 }
+    100%  { background-color: #fff }
+}
