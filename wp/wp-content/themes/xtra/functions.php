@@ -6,6 +6,16 @@ add_theme_support('post-thumbnails');
 ////////////////////////
 // Customize Menu Order
 ////////////////////////
+function remove_menus () {
+global $menu;
+	$restricted = array(__('Posts'), __('Comments'));
+	end ($menu);
+	while (prev($menu)){
+		$value = explode(' ',$menu[key($menu)][0]);
+		if(in_array($value[0] != NULL?$value[0]:"" , $restricted)){unset($menu[key($menu)]);}
+	}
+}
+add_action('admin_menu', 'remove_menus');
 function custom_menu_order($menu_ord) {
 	if (!$menu_ord) return true;
 	
@@ -14,9 +24,10 @@ function custom_menu_order($menu_ord) {
 		'separator1', // First separator
 
 		'edit.php?post_type=issue', // Issues
-		'edit.php?post_type=article', // Issues
+		'edit.php?post_type=article', // Articles
+		'edit.php?post_type=event', // Events
 		'edit.php?post_type=page', // Pages
-		'edit.php', // Posts
+		//'edit.php', // Posts
 		'upload.php', // Media
 
 		'separator2', // Second separator
@@ -33,46 +44,24 @@ function custom_menu_order($menu_ord) {
 }
 add_filter('custom_menu_order', 'custom_menu_order'); // Activate custom_menu_order
 add_filter('menu_order', 'custom_menu_order');
+add_action( 'admin_head', 'cpt_icons' );
+function cpt_icons() { ?>
 
+    <style type="text/css" media="screen">
+        #menu-posts-issue .wp-menu-image,
+        #menu-posts-article .wp-menu-image,
+        #menu-posts-event .wp-menu-image {
+            background: url(<?php bloginfo('template_url') ?>/_img/custom_menu.gif) no-repeat !important;
+        }
+        #menu-posts-issue .wp-menu-image { background-position: 1px -34px !important; }
+        #menu-posts-issue:hover .wp-menu-image { background-position: 1px -2px !important; }
+        #menu-posts-article .wp-menu-image { background-position: -29px -34px !important; }
+        #menu-posts-article:hover .wp-menu-image { background-position: -29px -2px !important; }
+        #menu-posts-event .wp-menu-image { background-position: -59px -34px !important; }
+        #menu-posts-event:hover .wp-menu-image { background-position: -59px -2px !important; }
+    </style>
 
-
-
-////////////////////////
-// Change post to event
-////////////////////////
-// function change_post_menu_label() {
-// 	global $menu;
-// 	global $submenu;
-// 	$menu[5][0] = 'Events';
-// 	$submenu['edit.php'][5][0] = 'Events';
-// 	$submenu['edit.php'][10][0] = 'Add Events';
-// 	$submenu['edit.php'][16][0] = 'Events Tags';
-// 	echo '';
-// }
-// function change_post_object_label() {
-// 	global $wp_post_types;
-// 	$labels = &$wp_post_types['post']->labels;
-// 	$labels->name = 'Events';
-// 	$labels->singular_name = 'Events';
-// 	$labels->add_new = 'Add Events';
-// 	$labels->add_new_item = 'Add Events';
-// 	$labels->edit_item = 'Edit Events';
-// 	$labels->new_item = 'Events';
-// 	$labels->view_item = 'View Events';
-// 	$labels->search_items = 'Search Events';
-// 	$labels->not_found = 'No Events found';
-// 	$labels->not_found_in_trash = 'No Events found in Trash';
-// }
-// add_action( 'init', 'change_post_object_label' );
-// add_action( 'admin_menu', 'change_post_menu_label' );
-
-// add_filter('gettext', 'change_post_to_article');
-// add_filter('ngettext', 'change_post_to_article');
-// function change_post_to_article($translated) {
-// $translated = str_ireplace('Post', 'Event', $translated);
-// return $translated;
-// }
-
+<?php }
 
 ////////////////////////
 // Article Post Type
@@ -138,7 +127,37 @@ function issue() {
 }
 add_action( 'init', 'issue' );
 
-
+////////////////////////
+// Event Post Type
+////////////////////////
+function event() {
+	$labels = array(
+		'name'               => _x( 'Events', 'post type general name' ),
+		'singular_name'      => _x( 'event', 'post type singular name' ),
+		'add_new'            => _x( 'Add New', 'Event' ),
+		'add_new_item'       => __( 'Add New Event' ),
+		'edit_item'          => __( 'Edit Event' ),
+		'new_item'           => __( 'New Event' ),
+		'all_items'          => __( 'All Events' ),
+		'view_item'          => __( 'View Event' ),
+		'search_items'       => __( 'Search Events' ),
+		'not_found'          => __( 'No events found' ),
+		'not_found_in_trash' => __( 'No events found in the Trash' ), 
+		'parent_item_colon'  => '',
+		'menu_name'          => 'Events'
+	);
+	$args = array(
+		'labels'        => $labels,
+		'description'   => 'All Events',
+		'public'        => true,
+		'menu_position' => 5,
+		'supports'      => array( 'title', 'editor', 'thumbnail'),
+		'has_archive'   => true,
+		'rewrite' => array('slug' => 'event')
+	);
+	register_post_type( 'event', $args );	
+}
+add_action( 'init', 'event' );
 
 ////////////////////////
 // Issue Taxonomy
@@ -300,7 +319,7 @@ function xtra_scripts() {
 add_action( 'admin_footer-index.php', 'wpse_82132_hide_rows' );
 
 function wpse_82132_hide_rows(){
-    $rows = array ('cats','tags');
+    $rows = array ('cats','tags','posts');
     $find = '.' . join( ',.', $rows ); ?>
 	<script>
 	jQuery( function( $ ) {
@@ -310,14 +329,29 @@ function wpse_82132_hide_rows(){
 <?php }
 
 function my_dash() {
-	$types = array('article','issue');
+	$taxonomies = get_taxonomies( $args, $output, $operator );
+	foreach ( $taxonomies as $taxonomy ) {
+	  	if($taxonomy->name == 'volume_taxonomy'){
+		    $num_terms = wp_count_terms( $taxonomy->name );
+		    $num = number_format_i18n( $num_terms );
+		    $text = _n( $taxonomy->labels->singular_name, $taxonomy->labels->name, intval( $num_terms ) );
+		    if ( current_user_can( 'manage_categories' ) ) {
+		      $num  = '<a href="edit-tags.php?taxonomy=' . $taxonomy->name . '">' . $num . '</a>';
+		      $text = '<a href="edit-tags.php?taxonomy=' . $taxonomy->name . '">' . $text . 's</a>';
+		    }
+		    echo '<tr><td class="first b b_pages">' . $num . '</td>';
+		    echo '<td class="t pages">' . $text . '</td></tr>';
+		}
+	}
+
+	$types = array('issue','article');
 	foreach($types as $type){
 		$num_type = wp_count_posts( $type );
 	    $num = number_format_i18n( $num_type->publish );
 	    $text = _n( $type, $type.'s', $num_type->publish );
 	    if ( current_user_can( 'edit_pages' ) ) { 
 	        $num = "<a href='edit.php?post_type=$type'>$num</a>";
-	        $text = "<a href='edit.php?post_type=$type'>$text</a>";
+	        $text = "<a href='edit.php?post_type=$type'>".ucfirst($text)."</a>";
 	    }   
 
 	    echo '<tr>';
@@ -332,23 +366,17 @@ function my_dash() {
   );
   $output   = 'object';
   $operator = 'and';
-	  $taxonomies = get_taxonomies( $args, $output, $operator );
-	  foreach ( $taxonomies as $taxonomy ) {
-	  	if($taxonomy->name == 'volume_taxonomy'){
-		    $num_terms = wp_count_terms( $taxonomy->name );
-		    $num = number_format_i18n( $num_terms );
-		    $text = _n( $taxonomy->labels->singular_name, $taxonomy->labels->name, intval( $num_terms ) );
-		    if ( current_user_can( 'manage_categories' ) ) {
-		      $num  = '<a href="edit-tags.php?taxonomy=' . $taxonomy->name . '">' . $num . '</a>';
-		      $text = '<a href="edit-tags.php?taxonomy=' . $taxonomy->name . '">' . $text . 's</a>';
-		    }
-		    echo '<tr><td class="first b b_pages">' . $num . '</td>';
-		    echo '<td class="t pages">' . $text . '</td></tr>';
-		}
-	  }
     
 }
 add_action( 'right_now_content_table_end', 'my_dash' );
 
-
+////////////////////////
+// Season Number
+////////////////////////
+$numbers = array(
+	'fall' 		=> 'Number 1',
+	'winter'	=> 'Number 2',
+	'spring'	=> 'Number 3',
+	'summer'	=> 'Number 4'
+);
 ?>

@@ -21,6 +21,7 @@ $args = array(
         )
     )
 );
+
 query_posts($args); 
 the_post();
 ?>
