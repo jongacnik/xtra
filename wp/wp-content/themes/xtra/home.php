@@ -7,7 +7,6 @@ $curr_nm = $get_current['post_title'];
 $curr_id = $get_current['ID']; ?>
 
 <?php 
-
 /* Get current issue stuff */
 $args = array(
 	'post_type' 		=> 'issue',
@@ -51,6 +50,37 @@ $args = array(
         'terms' 	=> 'artist_project',
         'field' 	=> 'slug',
         'operator'	=> 'NOT IN'
+        )
+    )
+);
+$articles = new WP_Query($args);
+if( $articles->have_posts() ) :
+  while ($articles->have_posts()) : $articles->the_post();
+	$thumb  = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); $thumb = $thumb[0]; 
+	$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
+	$author = get_field('author'); ?>
+  	
+  	<img src="<?=$thumb?>"><br>
+  	<?=$author?><br>
+    <a href="<?php the_permalink() ?>"><?php the_title(); ?></a><br>
+    <?=(get_field('web_only') ? 'Web Only ' : '').$type ?><br>
+    
+  <?php endwhile; ?>
+<?php endif; ?>
+<?php wp_reset_query(); ?>
+
+<?php /* Get current artist project */
+$args = array(
+  'issue_taxonomy' 		=> $curr_nm,
+  'post_type' 			=> 'article',
+  'post_status' 		=> 'publish',
+  'posts_per_page' 		=> -1,
+  'tax_query'			=> array(
+		array(
+        'taxonomy' 	=> 'artType_taxonomy',
+        'terms' 	=> 'artist_project',
+        'field' 	=> 'slug',
+        'operator'	=> 'IN'
         )
     )
 );
