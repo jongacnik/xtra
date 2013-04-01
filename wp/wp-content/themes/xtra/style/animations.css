@@ -1,0 +1,48 @@
+.spin {
+	-webkit-animation-name: spin;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-duration: 0.5s;
+	-moz-animation-name: spin;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: linear;
+	-moz-animation-duration: 0.5s;
+	-o-animation-name: spin;
+	-o-animation-iteration-count: infinite;
+	-o-animation-timing-function: linear;
+	-o-animation-duration: 0.5s;
+}
+	@-webkit-keyframes spin {
+		from { -webkit-transform: rotate(0deg); }
+		to { -webkit-transform: rotate(360deg); }
+	}
+	@-moz-keyframes spin {
+		from { -moz-transform: rotate(0deg); }
+		to { -moz-transform: rotate(360deg); }
+	}
+	@-o-keyframes spin {
+		from { -o-transform: rotate(0deg); }
+		to { -o-transform: rotate(360deg); }
+	}
+
+.fade, .full-fade {
+	opacity: 1;
+	transition: opacity .15s ease-in-out;
+	-moz-transition: opacity .15s ease-in-out;
+	-webkit-transition: opacity .15s ease-in-out;
+}
+	.fade:hover {
+		opacity: 0.5;
+	}
+	.full-fade:hover {
+		opacity: 0;
+	}
+	
+
+@-webkit-keyframes flash {
+      0% {background-color: white; color: black; }
+    100% {background-color: black; color: white; }
+}
+	.flash {
+	    -webkit-animation: flash 0.15s infinite alternate ease-in-out;
+	}

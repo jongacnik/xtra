@@ -2,13 +2,15 @@
 /*
 Template Name: Artist's Projects Archive
 */
-?>
+get_header(); ?>
 
 <?php 
 /* Global goods of current issue */
 $get_current = "SELECT * FROM xtra_posts WHERE post_type='issue' AND post_status='publish' ORDER BY post_date DESC LIMIT 1";
 $get_current = mysql_fetch_assoc(mysql_query($get_current));
 $curr_nm = $get_current['post_title']; ?>
+
+<div id="artist-proj-header" class="landing">
 
 <?php /* Get current artist project */
 $args = array(
@@ -29,19 +31,28 @@ $articles = new WP_Query($args);
 if( $articles->have_posts() ) :
   while ($articles->have_posts()) : $articles->the_post();
 	$thumb  = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); $thumb = $thumb[0]; 
+	$volume = wp_get_post_terms( $post->ID, 'volume_taxonomy', array("fields" => "names")); 
+	$volume = str_replace('v', 'Volume ', $volume[0]); 
+	$season = explode(' ', $curr_nm); 
+	$year   = $season[1];
+	$season = $season[0];
+	$number = $numbers[strtolower($season)];
 	$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
-	$author = get_field('author'); ?>
+	$author = get_field('author');
+	$artist = get_field('artist'); ?>
   	
-  	<img src="<?=$thumb?>"><br>
-  	<?=$author?><br>
-    <a href="<?php the_permalink() ?>"><?php the_title(); ?></a><br>
-    <?=(get_field('web_only') ? 'Web Only ' : '').$type ?><br>
-    
+    <div id="artproj-banner-hover">
+		<span class="artprojmeta century"><?=$curr_nm?> <?=$volume?> <?=$number?></span>
+		<br><?=$artist?><br><?php the_title(); ?>
+	</div>
+	<a href="<?php the_permalink() ?>"><div id="artproj-banner" style="background-image: url('<?=$thumb?>');" class="full-fade"></div></a>
+
   <?php endwhile; ?>
 <?php endif; ?>
 <?php wp_reset_query(); ?>
 
-<hr>
+</div>
+
 
 <?php
 /* Build alphabet array */
@@ -94,16 +105,75 @@ foreach($alphas as $alpha => $v){
 		$names[$key] = $last[1];
 	}
 	array_multisort($names, SORT_ASC, $alphas[$alpha]);
-}
+} ?>
 
-/* Spit out the list */
-foreach($alphas as $alpha => $artists){
-	if(!empty($artists)){
-		echo $alpha.'<br><br>';
-		foreach($artists as $each){ ?>
-			<a href="<?=$each['artistUrl']?>"><?=$each['artistName']?></a><br>
-  <?php }
-  		echo '<br>';
-	}
-}
-?>
+<div id="artplanding-wrap">
+	<div id="artp-left" class="padding-fix">
+		<div class="box-title century">Artist's Projects Archive</div>
+		<ul class="artists">
+			<?php
+
+			/* Spit out the list */
+			foreach($alphas as $alpha => $artists){
+				if($alpha == 'H' || $alpha == 'R') echo '</ul><ul class="artists">';
+				if(!empty($artists)){ ?>
+					<li><span class="alpha"><?=$alpha?></span>
+						<ul>
+						<?php foreach($artists as $each){ 
+							if($each['artistName'] == 'Justin Beal and Vishal Jugdeo') $each['artistName'] = 'Justin Beal and<br>Vishal Jugdeo'; ?>
+							<li><a href="<?=$each['artistUrl']?>"><?=$each['artistName']?></a><li>
+			  		<?php }
+			  		echo '</ul><li>';
+				}
+			}
+			?>
+		</ul>
+
+	</div>
+
+	<div id="artp-right"  class="padding-fix">
+		<a href="https://secure.x-traonline.org/store/category/4"><div id="artist-edition">
+			X-TRA<br>Artist Editions
+		</div></a>
+		<span class="meta gothic">Available at the Store</span>
+		<br><br><a href="https://secure.x-traonline.org/store/category/4" class="century">View All</a>
+		<ul class="ads ap">
+			<li>
+				<a href="#"><img src="/extra/ad1.jpg"></a>
+				<a href="#"><img src="/extra/ad2.jpg"></a>
+				<a href="#"><img src="/extra/ad3.jpg"></a>
+				<a href="#"><img src="/extra/ad4.jpg"></a>
+			</li>
+			<li>
+				<a href="#"><img src="/extra/ad3.jpg"></a>
+				<a href="#"><img src="/extra/ad1.jpg"></a>
+				<a href="#"><img src="/extra/ad4.jpg"></a>
+				<a href="#"><img src="/extra/ad2.jpg"></a>
+			</li>
+		</ul>
+		<!-- <div class="ads"> -->
+			<?php //do_action('column_ad1'); ?>
+			<?php //do_action('column_ad2'); ?>
+			<?php //do_action('column_ad3'); ?>
+			<?php //do_action('column_ad4'); ?>
+			<?php //do_action('column_ad5'); ?>
+			<?php //do_action('column_ad6'); ?>
+			<?php //do_action('column_ad7'); ?>
+			<?php //do_action('column_ad8'); ?>
+			<?php //do_action('column_ad9'); ?>
+			<?php //do_action('column_ad10'); ?>
+			<?php //do_action('column_ad11'); ?>
+			<?php //do_action('column_ad12'); ?>
+		<!-- </div> -->
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$('.ads').cycle({
+		'timeout':5000,
+		'speed': 300
+	})
+</script>
+
+<?php get_footer(); ?>

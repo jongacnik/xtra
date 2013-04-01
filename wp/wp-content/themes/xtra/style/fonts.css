@@ -1,0 +1,90 @@
+/* DECENNIE */
+@font-face {
+    font-family: 'decennieexpressjyosf';
+    src: url('fonts/decennieexpressjyosf-heavy-webfont.eot');
+    src: url('fonts/decennieexpressjyosf-heavy-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/decennieexpressjyosf-heavy-webfont.woff') format('woff'),
+         url('fonts/decennieexpressjyosf-heavy-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+
+
+/* GOTHIC 720 */
+@font-face {
+    font-family: 'gothic_720';
+    src: url('fonts/gothic720bt-romanb-webfont.eot');
+    src: url('fonts/gothic720bt-romanb-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/gothic720bt-romanb-webfont.woff') format('woff'),
+         url('fonts/gothic720bt-romanb-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'gothic_720';
+    src: url('fonts/gothic720bt-italicb-webfont.eot');
+    src: url('fonts/gothic720bt-italicb-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/gothic720bt-italicb-webfont.woff') format('woff'),
+         url('fonts/gothic720bt-italicb-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+
+/* TIMES BQ */
+@font-face {
+    font-family: 'times_bq';
+    src: url('fonts/timesbq-medium-wf.eot');
+    src: url('fonts/timesbq-medium-wf.eot?#iefix') format('embedded-opentype'),
+         url('fonts/timesbq-medium-wf.woff') format('woff'),
+         url('fonts/timesbq-medium-wf.ttf') format('truetype');
+         url('fonts/timesbq-medium-wf.svg#times_bqregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'times_bq';
+    src: url('fonts/timesbq-mediumitalic-wf.eot');
+    src: url('fonts/timesbq-mediumitalic-wf.eot?#iefix') format('embedded-opentype'),
+         url('fonts/timesbq-mediumitalic-wf.woff') format('woff'),
+         url('fonts/timesbq-mediumitalic-wf.ttf') format('truetype');
+         url('fonts/timesbq-mediumitalic-wf.svg#times_bqregular') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'times_bq';
+    src: url('fonts/timesbq-bold-wf.eot');
+    src: url('fonts/timesbq-bold-wf.eot?#iefix') format('embedded-opentype'),
+         url('fonts/timesbq-bold-wf.woff') format('woff'),
+         url('fonts/timesbq-bold-wf.ttf') format('truetype');
+         url('fonts/timesbq-bold-wf.svg#times_bqregular') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'times_bq';
+    src: url('fonts/timesbq-bolditalic-wf.eot');
+    src: url('fonts/timesbq-bolditalic-wf.eot?#iefix') format('embedded-opentype'),
+         url('fonts/timesbq-bolditalic-wf.woff') format('woff'),
+         url('fonts/timesbq-bolditalic-wf.ttf') format('truetype');
+         url('fonts/timesbq-bolditalic-wf.svg#times_bqregular') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+
+/* CENTURY (Firefox) */
+@font-face {
+    font-family: 'century_gothic';
+    src: url('fonts/centurygothic-bold-webfont.eot');
+    src: url('fonts/centurygothic-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/centurygothic-bold-webfont.woff') format('woff'),
+         url('fonts/centurygothic-bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

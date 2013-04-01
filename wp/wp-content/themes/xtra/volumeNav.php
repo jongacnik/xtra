@@ -1,6 +1,7 @@
+<ul id="archive-list" class="century bold">
 <?php $volumes = count(get_terms( 'volume_taxonomy'));
 		for($i=$volumes;$i>0;$i--){
-			echo $i.'<br>';
+			echo '<li class="'.($i == $vNum ? "current" : "").'"><span class="volume-number">Volume '.$i.'</span><ul>';
 		  	$args = array(
 			  'post_type' 			=> 'issue',
 			  'post_status' 		=> 'publish',
@@ -19,11 +20,12 @@
 			if( $issues->have_posts() ) :
 			  $counter = $issues->found_posts;
 			  while ($issues->have_posts()) : $issues->the_post(); ?>
-			    Number <?=$counter?>
-				<?php the_permalink(); ?><br>
+			    <li class="<?=($iNum == $counter && $i == $vNum ? "current" : "")?>"><a href="<?php the_permalink(); ?>">Number <?=$counter?></a><li>
 				<?php $counter--; ?>
 		<?php endwhile;
 			endif;
+			echo '</li></ul>';
 			wp_reset_query(); 
 	  }
 ?>
+</ul>

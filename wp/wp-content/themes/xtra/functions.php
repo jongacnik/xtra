@@ -309,9 +309,22 @@ function xtra_scripts() {
    wp_deregister_script('jquery');
    wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js", false, null);
    wp_enqueue_script('jquery');
-   wp_register_script( 'beast', get_template_directory_uri().'/_js/beast.js');
-   wp_enqueue_script('beast');
+  
+   wp_register_script( 'cycle', get_template_directory_uri().'/_js/jquery.cycle.all.js');
+   wp_enqueue_script('cycle');
+
+   wp_register_script( 'stuck', get_template_directory_uri().'/_js/jquery.stuckontop.js');
+   wp_enqueue_script('stuck');
+
+   wp_register_script( 'shadowbox', get_template_directory_uri().'/_js/shadowbox.js');
+   wp_enqueue_script('shadowbox');
+
+   wp_register_script( 'magic', get_template_directory_uri().'/_js/magic.js');
+   wp_enqueue_script('magic');
 }
+remove_action('wp_head', 'rsd_link');
+remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'wp_generator');
 
 ////////////////////////
 // Dashboard Additions
@@ -369,6 +382,15 @@ function my_dash() {
     
 }
 add_action( 'right_now_content_table_end', 'my_dash' );
+
+////////////////////////
+// Add Image Sizes
+////////////////////////
+if ( function_exists( 'add_image_size' ) ) { 
+	add_image_size( 'slider', 700, 427, true );
+	add_image_size( 'artist-banner', 940, 427, true );
+	add_image_size( 'artist-project-image', 1200, 9999, false );
+}
 
 ////////////////////////
 // Season Number

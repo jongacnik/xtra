@@ -1,0 +1,25 @@
+canvas { 
+	background: white; 
+	margin-top: 40px;
+}
+.controls {
+	position: fixed;
+	top: 30px;
+	right: 30px;
+	width: 120px;
+}
+	.controls a {
+		display: inline-block;
+		width: 37px;
+		height: 37px;
+		border: none;
+		cursor: pointer;
+	}
+	#zoomIn { background: url(../_images/zoomIn.gif) no-repeat; }
+	#zoomOut { background: url(../_images/zoomOut.gif) no-repeat; margin-right: 20px; }
+	#close {
+		position: fixed;
+		right: 30px;
+		top: 30px;
+		opacity: .65;
+	}
