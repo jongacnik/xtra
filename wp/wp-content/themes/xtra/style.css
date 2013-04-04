@@ -429,6 +429,9 @@ nav {
 	border-right: 1px dotted #9C9A93;
 	position: relative;
 }
+.v1fix li {
+	float: left;
+}
 	.level-2 li:first-child { border: none; }
 	.level-2 li img{
 		height: 240px;

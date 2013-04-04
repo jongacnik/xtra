@@ -44,17 +44,23 @@ Template Name: Volumes
 
 			while ($issues->have_posts()) : $issues->the_post(); 
 		    	$cover  = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' ); $cover = $cover[0]; ?>
+
+		    	<?php 
+		    	//Dirty fix for Volume 1 which has 5 issues
+		    	if($i == 1 && $counter == 1){
+		    		echo '</ul></li></ul>';
+		    		echo '<ul class="level-1"><li class="volume"><div class="box-title century">Volume 1</div><ul class="level-2 v1fix">';
+		    	}?>
 		    	<li>
 		    		<a href="<?php the_permalink(); ?>"><img src="<?=$cover?>" class="full-fade"><div class="issue-title times"><?php the_title(); ?>
                     <br>Number <?=$counter?></div></a>
-
 					<?php $counter--; ?>
 				</li>
 	  <?php endwhile;
 	  		
 		endif;
 
-	    echo '</ul></li>';
+	    echo '</ul></li></ul>';
 		wp_reset_query(); 
   }
 ?>
