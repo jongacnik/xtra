@@ -4,6 +4,8 @@
 		<meta charset="utf-8"/>
 		<title><?php bloginfo('name'); ?></title>
 		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+	    <link rel="shortcut icon" href="/favicon.ico"/>
+
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/style/shadowbox.css" type="text/css" media="screen,projection" />
 		<?php wp_head(); ?>
