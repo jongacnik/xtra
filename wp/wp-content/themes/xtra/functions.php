@@ -434,7 +434,7 @@ function my_attachments( $attachments )
 {
   $args = array(
     'label'         => "Attached Images (For Artist's Project & Events)",
-    'post_type'     => array( 'article, event' ),
+    'post_type'     => array( 'article', 'event' ),
     'filetype'      => null,
     'note'          => 'Attach files here!',
     'button_text'   => __( 'Attach Files', 'attachments' ),
