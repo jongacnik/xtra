@@ -25,8 +25,8 @@ function custom_menu_order($menu_ord) {
 
 		'edit.php?post_type=issue', // Issues
 		'edit.php?post_type=article', // Articles
-		'edit.php?post_type=event', // Events
 		'edit.php?post_type=page', // Pages
+		'edit.php?post_type=event', // Events
 		'edit.php?post_type=advertisement', // Ads
 		//'edit.php', // Posts
 		'upload.php', // Media
