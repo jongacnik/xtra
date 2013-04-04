@@ -168,16 +168,15 @@ wp_reset_query(); ?>
 		);
 		$ads = new WP_Query($args);
 		if( $ads->have_posts() ) :
-			$count = 1;
+			$count = 0;
 			while ($ads->have_posts()) : $ads->the_post();
 				$img  = get_field('ad_image');
 				$url  = get_field('ad_url');
 				$name = get_the_title(); ?>
 
+			    <?php if($count!=0 && $count%4 == 0) echo '</li><li>'; ?>
 			    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img?>"></a>
-					
-				<?php $count++;
-				if($count%4 == 0) echo '</li><li>'; ?>
+				<?php $count++; ?>
 
 		  	<?php endwhile; ?>
 		<?php endif; ?>
