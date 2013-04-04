@@ -102,4 +102,7 @@ wp_reset_query(); ?>
 
 
 </div>
+<script>
+$('.page-item-7586').addClass('current_page_item')
+</script>
 <?php get_footer(); ?>
