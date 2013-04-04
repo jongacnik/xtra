@@ -118,6 +118,7 @@ $link = get_permalink(); ?>
 						  while ($events->have_posts()) : $events->the_post();
 						  	$thumb  	= wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); $thumb = $thumb[0];  
 							$eventName	= get_the_title();
+							$eventName = strlen($eventName) > 60 ? substr( $eventName, 0, strrpos( substr( $eventName, 0, 60), ' ' ) ).'...' : $eventName;
 							$eventUrl	= get_permalink();
 							$eventDate  = get_field('EVENT-date'); ?>
 							
