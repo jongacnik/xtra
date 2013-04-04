@@ -7,7 +7,7 @@ co-produced events in collaboration with the following venues and organizations:
 </div>
 
 
-<?php /* Get upcoming/recent project */
+<?php /* Get upcoming/recent event */
 $eventWidget = array(
 	'upcoming' 	=> array(),
 	'recent'	=> array()
@@ -69,7 +69,7 @@ wp_reset_query(); ?>
 		<?php if (have_posts()) : ?>
 		<ul id="events">
 			<?php while (have_posts()) : the_post(); 
-				$thumb    = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); $thumb = $thumb[0]; 
+				$thumb    = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'slider' ); $thumb = $thumb[0]; 
 				$sortDate = get_field('EVENT-startdate');
 				$date     = get_field('EVENT-date');
 				$time     = get_field('EVENT-time');
@@ -85,7 +85,7 @@ wp_reset_query(); ?>
 					<span class="place"><?=$place?></span>
 				</div>
 				<div class="event-content">
-					<img src="<?=$thumb?>">
+					<a href="<?php the_permalink() ?>"><img src="<?=$thumb?>"></a>
 			    	<?php the_excerpt(); ?>
 			    </div>
 			</li>

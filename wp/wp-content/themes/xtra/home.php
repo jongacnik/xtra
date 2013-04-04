@@ -106,13 +106,33 @@ $link = get_permalink(); ?>
 				<div id="home-events">
 					<div class="box-title century home-small-box">Events</div>
 					<ul> <!-- INSERT EVENTS -->
+
+						<?php $args = array(
+						  'post_type' 			=> 'event',
+						  'post_status' 		=> 'publish',
+						  'posts_per_page' 		=> 2,
+						  'post_count'			=> 2
+						);
+						$events = new WP_Query($args);
+						if( $events->have_posts() ) :
+						  while ($events->have_posts()) : $events->the_post();
+						  	$thumb  	= wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); $thumb = $thumb[0];  
+							$eventName	= get_the_title();
+							$eventUrl	= get_permalink();
+							$eventDate  = get_field('EVENT-date'); ?>
+							
 						<li>
-							<a href="<?php //$eventLink?>" class="home-image fade" style="background-image: url('<?php //$eventThumb[0]?>');"></a>
-							<span class="home-da gothic"><?php //$eventDate[0]?></span>
+							<a href="<?=$eventUrl?>" class="home-image fade"><img src="<?=$thumb?>"></a>
+							<span class="home-da gothic"><?=$eventDate?></span>
 							<div class="home-title">
-								<a href="<?php //$eventLink?>"><?php //$eventTitle?></a>
+								<a href="<?=$eventUrl?>"><?=$eventName?></a>
 							</div>
 						</li>
+
+					<?php endwhile; 
+						endif;
+						wp_reset_query(); ?>
+
 					</ul>
 				</div>
 	    				
