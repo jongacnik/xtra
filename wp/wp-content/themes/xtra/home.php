@@ -25,7 +25,8 @@ $season = explode(' ', get_the_title());
 $year   = $season[1];
 $season = $season[0];
 $number = $numbers[strtolower($season)];
-$buyurl = get_field('purchase_url'); ?>
+$buyurl = get_field('purchase_url');
+$link = get_permalink(); ?>
 <?php wp_reset_query(); ?>
 
 
@@ -190,7 +191,7 @@ $buyurl = get_field('purchase_url'); ?>
 						$title = strlen($title) > 60 ? substr( $title, 0, strrpos( substr( $title, 0, 60), ' ' ) ).'...' : $title; ?>
 
 					    <li>
-							<a href="<?=$articlelink?>" class="home-image fade"><img src="<?=$thumb?>"></a>
+							<a href="<?php the_permalink() ?>" class="home-image fade"><img src="<?=$thumb?>"></a>
 							<span class="home-da gothic"><?=$author?></span>
 							<div class="home-title">
 								<a href="<?php the_permalink() ?>"><?=$title?></a>

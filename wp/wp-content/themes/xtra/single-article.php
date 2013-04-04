@@ -1,3 +1,5 @@
+<?php get_header(); ?>
+
 <?php
 
 /* Get current issue stuff */
@@ -21,19 +23,9 @@ $season = explode(' ', get_the_title());
 $year   = $season[1];
 $season = $season[0];
 $number = $numbers[strtolower($season)];
-$buyurl = get_field('purchase_url'); ?>
+$buyurl = get_field('purchase_url');
+$link = get_permalink(); ?>
 <?php wp_reset_query(); ?>
-
-<div class="issue">
-<img src="<?=$cover?>">
-<br><?=$season?> <?=$year?>
-<br><?=$volume?>
-<br><?=$number?>
-<br><?=$buyurl?>
-</div>
-
-
-<hr>
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
@@ -51,11 +43,10 @@ $buyurl = get_field('purchase_url'); ?>
 	}
 	?>
 
-	<h1><?php the_title() ;?></h1>	
-	<?php the_content(); ?>
-
 <?php endwhile; else: ?>
 
 	<p>Sorry, this page does not exist</p>
 
 <?php endif; ?>
+
+<?php get_footer(); ?>

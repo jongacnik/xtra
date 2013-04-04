@@ -9,7 +9,7 @@
 #sb-body img{border:none;cursor: pointer;}
 #sb-loading{position:relative;height:100%;}
 #sb-loading-inner{position:absolute;font-size:14px;line-height:24px;height:50px;width:50px;top:50%;margin-top:-12px;width:100%;text-align:center;}
-#sb-loading-inner span{background:url(../images/shadowbox/loading.gif) no-repeat;padding-left:34px;height:50px;width:50px;display:inline-block;}
+#sb-loading-inner span{background:url(../_img/shadowbox/loading.gif) no-repeat;padding-left:34px;height:50px;width:50px;display:inline-block;}
 #sb-body,#sb-loading{background-color:#000;}
 #sb-title,#sb-info{
 	color: black;
@@ -67,8 +67,8 @@
 	font-size: 34px;
 	content: '←';  
 }
-#sb-nav-play{background-image:url(../images/shadowbox/play.png);}
-#sb-nav-pause{background-image:url(../images/shadowbox/pause.png);}
+#sb-nav-play{background-image:url(../_img/shadowbox/play.png);}
+#sb-nav-pause{background-image:url(../_img/shadowbox/pause.png);}
 #sb-counter{float:left;width:45%;}
 #sb-counter a{padding:0 4px 0 0;text-decoration:none;cursor:pointer;color:#fff;}
 #sb-counter a.sb-counter-current{text-decoration:underline;}

@@ -4,22 +4,10 @@ function glueIt() {
 		var b = $(window).scrollTop();
 		var d = $(".glue-anchor").offset().top-90;
 		var c=$(".glue");
-		// if (b>d) {
-		// 	//if (b<1200){
-		// 	//	$('.glue-anchor').css('height',1);
-		//  	//	c.css({position:"fixed",top:"90px"});
-		// 	//} else {
-		// 		$('.glue-anchor').css('height',0);
-		// 		c.css({position:"relative",top:"90px"})
-		// 		//c.css({position:"relative",top:"980px"})
-		// 	//}
-			
-		// } else {
 			if (b<=d) {
 				$('.glue-anchor').css('height',0);
 				c.css({position:"relative",top:""})
 			}
-		//}
 	};
 	$(window).scroll(a);
 }
@@ -104,10 +92,10 @@ $(function(){
 			var imgW = $(this).width();
 			if (imgH > imgW){
 				if (!bigornot){
-					$(this).css('width',700);
+					$(this).css('width', 700).removeClass('zoomIn').addClass('zoomOut');
 					bigornot = true;
 				} else {
-					$(this).css('width',300);
+					$(this).css('width', 300).removeClass('zoomOut').addClass('zoomIn');
 					bigornot = false;
 				}
 			}

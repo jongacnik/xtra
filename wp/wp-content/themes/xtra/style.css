@@ -175,6 +175,8 @@ nav {
 			.current-issue-meta li a {
 				border-bottom: 1px solid black;
 			}
+
+
 		
 /* HOME */
 #xtra-home { margin-top: 40px; }
@@ -510,18 +512,7 @@ nav {
 
 			#archive-list ul li { margin-left: 36px; }
 			#archive-list .current li.current:before { content: '\2192'; margin-right: 7px; }
-	#toc-pdf { 
-		width: 700px; 
-		float: left;
-		margin-bottom: 52px;
-	}
-		.pdf-hide {
-			overflow: hidden;
-			
-		}
-		.pdf-hide iframe {
-			margin-top: -37px;
-		}
+
 
 /* ARTICLE */
 #article-wrap {
@@ -559,6 +550,14 @@ nav {
 				display: block;
 				margin-bottom: 8px;
 			}
+			#art-header h2 i, #artproj-header h2 i,
+			#art-header h2 em, #artproj-header h2 em {
+				font-weight: bold;
+				font-style: normal;
+				/*font-size: 18px;*/
+				color: #aaa;
+				-webkit-font-smoothing: antialiased !important;
+			}
 			#art-author { 
 				display: block ;
 				font-family: 'gothic_720', Arial, sans-serif;
@@ -576,6 +575,14 @@ nav {
 			width: 700px;
 			height: auto;
 			margin: 24px 0 0 0;
+		}
+		.page img.zoomIn {
+			cursor:url(_img/lupe_plus.ico), pointer;	
+			cursor:-moz-zoom-in;
+		}
+		.page img.zoomOut {
+			cursor: url(_img/lupe_minus.ico), pointer;
+			cursor: -moz-zoom-out;
 		}
 		.page p {
 			padding: 0 20px 0 10px;
@@ -621,6 +628,50 @@ nav {
 			margin: 0 !important;
 			margin-right: 20px !important;
 		}
+
+/* PDF */
+#article-wrap.pdf { 
+	border-bottom: 1px dotted #9C9A93; 
+	padding-bottom: 36px !important;
+}
+#article-wrap.pdf .current-issue {
+	text-align: left;
+	margin-top: 24px;
+
+}
+	#article-wrap.pdf .current-issue-cover {
+		float: left;
+		height: 116px;
+		line-height: 116px;
+		margin-left: 14px;
+	}
+	#article-wrap.pdf .current-issue-cover img {
+		height: 100%;
+		width: auto;
+	}
+	#article-wrap.pdf .current-issue-title {
+		float: left;
+		margin-left: 24px;
+	}
+	#article-wrap.pdf .current-issue-meta-pdf {
+		float: left;
+		line-height: 20px;
+		text-align: left;
+		margin: 6px 0 0 24px;
+	}
+	#article-wrap.pdf .current-issue-meta-pdf li a {
+		border-bottom: 1px solid black;
+	}
+	#article-wrap.pdf .current-issue-meta-pdf li:before {
+		content: '\2192';
+		margin-right: 10px;
+	}
+
+	.pdf #art-header{ padding-left: 30px; margin-bottom: 0;}
+
+.pdfWrap {
+	margin-bottom: 72px;
+}
 	
 /* FOOTNOTES */
 	/* footnotes */
@@ -672,13 +723,14 @@ nav {
 		max-width: 300px;
 		position:absolute;
 		background-color:white;
-		padding:10px;
-		border:2px solid #242021;
+		padding:10px !important;
+		border:2px solid #242021 !important;
 		font-family: 'times_bq', times, serif;
 		font-weight: bold;
 		font-size: 12px;
 		line-height: 16px;
 		z-index:99;
+		box-shadow: none !important;
 	}
 	#fn-heading { text-transform: uppercase; font-family: 'gothic_720', Arial, sans-serif; font-size: 11px; }
 	.fn-text { text-decoration:none; }

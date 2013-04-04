@@ -5,7 +5,8 @@
 var vH = 792+72;
 var winH = $(window).height();
 var scale = winH/vH;
-scale = scale<1 ? scale=1 : scale=scale;
+// scale = scale<1 ? scale=1 : scale=scale;
+scale = 1.625;
 
 PDFJS.getDocument(thePDF).then(function(pdf) {
 
@@ -19,7 +20,7 @@ PDFJS.getDocument(thePDF).then(function(pdf) {
 			c[0].height = viewport.height;
 			c[0].width = viewport.width;
 			
-			$('.wrapper').css('width',c[0].width);
+			$('.pdfWrap').css('width',c[0].width);
 
 			var renderContext = {
 				canvasContext: context,
@@ -31,15 +32,20 @@ PDFJS.getDocument(thePDF).then(function(pdf) {
 
 	var numPages = pdf.numPages;
 	for (var i=1;i<=numPages;i++){
-		$('.wrapper').append('<canvas class="page" />');
+		$('.pdfWrap').append('<canvas class="page" />');
 	}
 
 	$('.page').each(function(e){
 		var canvas = $(this);
+		console.log('render')
+		console.log(e)
+		console.log(canvas)
+		console.log(scale)
 		renderPage(e,canvas,scale);
 	});
 
 	$('#zoomIn').click(function(){
+		console.log('go')
 		scale += .25;
 		$('.page').each(function(e){
 			var canvas = $(this);

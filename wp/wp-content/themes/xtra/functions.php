@@ -153,7 +153,7 @@ function event() {
 		'menu_position' => 5,
 		'supports'      => array( 'title', 'editor', 'thumbnail'),
 		'has_archive'   => true,
-		'rewrite' => array('slug' => 'event')
+		'rewrite' => array('slug' => 'events')
 	);
 	register_post_type( 'event', $args );	
 }
@@ -391,6 +391,93 @@ if ( function_exists( 'add_image_size' ) ) {
 	add_image_size( 'artist-banner', 940, 427, true );
 	add_image_size( 'artist-project-image', 1200, 9999, false );
 }
+
+////////////////////////
+// Attachements
+////////////////////////
+define( 'ATTACHMENTS_DEFAULT_INSTANCE', false );
+function my_attachments( $attachments )
+{
+  $args = array(
+    'label'         => "Artist's Project Images",
+    'post_type'     => array( 'article' ),
+    'filetype'      => null,
+    'note'          => 'Attach files here!',
+    'button_text'   => __( 'Attach Files', 'attachments' ),
+    'modal_text'    => __( 'Attach', 'attachments' ),
+ 
+    'fields'        => array(
+      array(
+        'name'  => 'title',                          // unique field name
+        'type'  => 'text',                           // registered field type
+        'label' => __( 'Title', 'attachments' ),     // label to display
+      )
+    ),
+ 
+  );
+ 
+  $attachments->register( 'my_attachments', $args ); // unique instance name
+}
+ 
+add_action( 'attachments_register', 'my_attachments' );
+
+////////////////////////
+// NEXT AND NUMBER LINKS
+////////////////////////
+add_filter('wp_link_pages_args','add_next_and_number');
+function add_next_and_number($args){
+    if($args['next_or_number'] == 'next_and_number'){
+        global $page, $numpages, $multipage, $more, $pagenow;
+        $args['next_or_number'] = 'number';
+        $prev = '';
+        $next = '';
+        if ( $multipage ) {
+            if ( $more ) {
+                $i = $page - 1;
+                if ( $i && $more ) {
+                    $prev .= '<span class="np">' . _wp_link_page($i);
+                    $prev .= $args['link_before']. $args['previouspagelink'] . $args['link_after'] . '</a></span>';
+                }
+                $i = $page + 1;
+                if ( $i <= $numpages && $more ) {
+                    $next .= '<span class="np">' . _wp_link_page($i);
+                    $next .= $args['link_before']. $args['nextpagelink'] . $args['link_after'] . '</a></span>';
+                }
+            }
+        }
+        $args['before'] = $args['before'].$prev;
+        $args['after'] = $next.$args['after'];    
+    }
+    return $args;
+}
+
+
+////////////////////////
+// BETTER EXCERPT
+////////////////////////
+function improved_trim_excerpt($text) {
+    global $post;
+    if ( '' == $text ) {
+        $text = get_the_content('');
+        $text = apply_filters('the_content', $text);
+        $text = str_replace('\]\]\>', ']]&gt;', $text);
+        $text = preg_replace('@<script[^>]*?>.*?</script>@si', '', $text);
+        $text = strip_tags($text, '<p>, <a>');
+        $excerpt_length = 80;
+        $words = explode(' ', $text, $excerpt_length + 1);
+        if (count($words)> $excerpt_length) {
+            array_pop($words);
+            array_push($words, '[...]');
+            $text = implode(' ', $words);
+        }
+    }
+    return $text;
+}
+remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+add_filter('get_the_excerpt', 'improved_trim_excerpt');
+function excerpt_ellipse($text) {
+   return str_replace('[...]', ' ...<br><br><b><a href="'.get_permalink().'" style="text-decoration:none;">Read More &rarr;</a></b>', $text); }
+add_filter('the_excerpt', 'excerpt_ellipse');
 
 ////////////////////////
 // Season Number
