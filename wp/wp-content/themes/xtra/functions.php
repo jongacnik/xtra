@@ -27,6 +27,7 @@ function custom_menu_order($menu_ord) {
 		'edit.php?post_type=article', // Articles
 		'edit.php?post_type=event', // Events
 		'edit.php?post_type=page', // Pages
+		'edit.php?post_type=advertisement', // Ads
 		//'edit.php', // Posts
 		'upload.php', // Media
 
@@ -158,6 +159,38 @@ function event() {
 	register_post_type( 'event', $args );	
 }
 add_action( 'init', 'event' );
+
+////////////////////////
+// Ads Post Type
+////////////////////////
+function advertisement() {
+	$labels = array(
+		'name'               => _x( 'Advertisements', 'post type general name' ),
+		'singular_name'      => _x( 'advertisement', 'post type singular name' ),
+		'add_new'            => _x( 'Add New', 'advertisement' ),
+		'add_new_item'       => __( 'Add New advertisement' ),
+		'edit_item'          => __( 'Edit advertisement' ),
+		'new_item'           => __( 'New advertisement' ),
+		'all_items'          => __( 'All Advertisements' ),
+		'view_item'          => __( 'View advertisement' ),
+		'search_items'       => __( 'Search Advertisements' ),
+		'not_found'          => __( 'No Advertisements found' ),
+		'not_found_in_trash' => __( 'No Advertisements found in the Trash' ), 
+		'parent_item_colon'  => '',
+		'menu_name'          => 'Ads'
+	);
+	$args = array(
+		'labels'        => $labels,
+		'description'   => 'All Advertisements',
+		'public'        => true,
+		'menu_position' => 5,
+		'supports'      => array( 'title', 'editor'),
+		'has_archive'   => false,
+		'rewrite' => array('slug' => 'advertisements')
+	);
+	register_post_type( 'advertisement', $args );	
+}
+add_action( 'init', 'advertisement' );
 
 ////////////////////////
 // Issue Taxonomy
@@ -387,6 +420,7 @@ add_action( 'right_now_content_table_end', 'my_dash' );
 // Add Image Sizes
 ////////////////////////
 if ( function_exists( 'add_image_size' ) ) { 
+	add_image_size( 'advertisement', 75, 75, true );
 	add_image_size( 'slider', 700, 427, true );
 	add_image_size( 'artist-banner', 940, 427, true );
 	add_image_size( 'artist-project-image', 1200, 9999, false );

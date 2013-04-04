@@ -210,16 +210,30 @@ $link = get_permalink(); ?>
 		<div id="home-right">
 			<ul class="ads">
 				<li>
-					<a href="#"><img src="/extra/ad1.jpg"></a>
-					<a href="#"><img src="/extra/ad2.jpg"></a>
-					<a href="#"><img src="/extra/ad3.jpg"></a>
-					<a href="#"><img src="/extra/ad4.jpg"></a>
-				</li>
-				<li>
-					<a href="#"><img src="/extra/ad3.jpg"></a>
-					<a href="#"><img src="/extra/ad1.jpg"></a>
-					<a href="#"><img src="/extra/ad4.jpg"></a>
-					<a href="#"><img src="/extra/ad2.jpg"></a>
+				<?php
+
+				/* Get ads */
+				$args = array(
+				  'post_type' 			=> 'advertisement',
+				  'post_status' 		=> 'publish',
+				  'posts_per_page' 		=> -1
+				);
+				$ads = new WP_Query($args);
+				if( $ads->have_posts() ) :
+					$count = 1;
+					while ($ads->have_posts()) : $ads->the_post();
+						$img  = get_field('ad_image');
+						$url  = get_field('ad_url');
+						$name = get_the_title(); ?>
+
+					    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img?>"></a>
+							
+						<?php $count++;
+						if($count%4 == 0) echo '</li><li>'; ?>
+
+				  	<?php endwhile; ?>
+				<?php endif; ?>
+				<?php wp_reset_query(); ?>
 				</li>
 			</ul>
 
