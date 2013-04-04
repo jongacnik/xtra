@@ -146,7 +146,7 @@ get_header(); ?>
 			<span>X-TRA accepts unsolicited submissions via email.<br><br>
 			Please send article description, CV, and writing samples to the editors at: <a href="mailto:editors@x-traonline.org">editors@x-traonline.org</a></span>
 		</div>
-		<iframe src="/extra/mailing.php" width="230" height="138" scrolling="no" class="about-mail"></iframe>
+		<iframe src="<?php bloginfo('template_url'); ?>/mailing.php" width="230" height="138" scrolling="no" class="about-mail"></iframe>
 
 	</div>
 </div>
