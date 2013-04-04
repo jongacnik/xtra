@@ -44,7 +44,7 @@ if( $upcoming->have_posts() ) :
 endif;
 wp_reset_query(); ?>
 
-<div id="events-wrap">
+<div id="events-wrap" class="evArch">
 	<div id="events-left" class="padding-fix">
 
 		<div id="event-overview">

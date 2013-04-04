@@ -762,8 +762,9 @@ nav {
 	overflow: hidden;
 	background-image: url('_img/events_bg.gif');
 	background-repeat: repeat-y; 
-	margin-bottom: 130px;
+	padding-bottom: 72px;
 }
+.evArch { margin-bottom: 130px; padding-bottom: 0 !important; }
 .eventNav {
 	text-align: center;
 	height: 50px;
