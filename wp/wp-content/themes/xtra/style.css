@@ -762,8 +762,22 @@ nav {
 	overflow: hidden;
 	background-image: url('_img/events_bg.gif');
 	background-repeat: repeat-y; 
-	padding-bottom: 72px;
+	margin-bottom: 130px;
 }
+.eventNav {
+	text-align: center;
+	height: 50px;
+	width: 100%;
+	padding-top: 18px;
+	margin-top: 42px;
+	float: left;
+	border-top: 1px dotted #9C9A93;
+	font-family: Century Gothic, 'century_gothic', Arial, sans-serif; 
+	font-weight: bold; 
+	text-transform: uppercase;
+	font-size: 13px;
+}
+.eventNav a { margin: 0 10px 0 10px; }
 	#events-left {
 		width: 720px;
 		float: left;

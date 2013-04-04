@@ -92,8 +92,8 @@ wp_reset_query(); ?>
 			<?php endwhile; ?>
 		</ul>
 		<div class="eventNav">
-			<? next_posts_link('Older') ?>
-			<? previous_posts_link('Newer') ?>
+			<? next_posts_link('&larr; Previous') ?>
+			<? previous_posts_link('Next &rarr;') ?>
 		</div>
 		<?php endif; ?>
 	</div>
