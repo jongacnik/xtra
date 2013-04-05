@@ -114,7 +114,7 @@ $args = array(
   'post_count'			=> -1,
   'orderby'				=> 'meta_value',
   'meta_key' 			=> 'EVENT-startdate',
-  'order' 				=> 'ASC',
+  'order' 				=> 'DESC',
 );
 $upcoming = new WP_Query($args);
 if( $upcoming->have_posts() ) :
@@ -141,7 +141,8 @@ wp_reset_query(); ?>
 		<div class="box-title century">Events Archive</div>
 		<ul>
 	<?php foreach($years as $year => $events){
-		if(!empty($events)){ ?>
+		if(!empty($events)){ 
+		$events = array_reverse($events); ?>
 			<li>
 				<span class="event-year"><?=$year?></span>
 				<ul>
