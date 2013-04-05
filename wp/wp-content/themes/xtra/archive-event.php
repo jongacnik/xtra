@@ -114,7 +114,7 @@ $args = array(
   'post_count'			=> -1,
   'orderby'				=> 'meta_value',
   'meta_key' 			=> 'EVENT-startdate',
-  'order' 				=> 'DESC',
+  'order' 				=> 'ASC',
 );
 $upcoming = new WP_Query($args);
 if( $upcoming->have_posts() ) :

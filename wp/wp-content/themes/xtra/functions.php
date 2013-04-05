@@ -316,6 +316,7 @@ add_action( 'restrict_manage_posts', 'todo_restrict_manage_posts' );
 add_filter('parse_query','todo_convert_restrict');
 
 
+
 ////////////////////////
 // Add Thumbnail to Issue
 ////////////////////////

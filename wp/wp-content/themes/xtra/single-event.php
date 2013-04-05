@@ -26,9 +26,18 @@
 				<span class="place"><?=$place?></span>
 			</div>
 			<div class="event-content">
-				<a href="<?php the_permalink() ?>"><img src="<?=$thumb?>"></a>
+				<?php $attachments = new Attachments( 'my_attachments' ); ?>
+				<?php if( $attachments->exist() ) : ?>
+				<ul class="event-imgs">
+				    <?php while( $attachments->get() ) : ?>
+				    	<li><img src="<?=$attachments->src('large')?>"></li>
+				    <?php endwhile; ?>
+				</ul>
+				<?php if($attachments->total() > 1){ ?>
+				<div class="img-nav"><div class="prev">&larr;</div><div class="dots"></div><div class="next">&rarr;</div></div>
+				<?php } ?>
+				<?php endif; ?>
 		    	<?php the_content(); ?>
-		    	<a href="http://www.facebook.com/sharer.php?u=<?php the_permalink();?>&t=<?php the_title(); ?>" alt="Share on Facebook" title="Share on Facebook" target="_blank">Facebook</a>
 		    </div>
 		</li>
 	</ul>
@@ -56,7 +65,7 @@ $args = array(
   'post_count'			=> -1,
   'orderby'				=> 'meta_value',
   'meta_key' 			=> 'EVENT-startdate',
-  'order' 				=> 'DESC',
+  'order' 				=> 'ASC',
 );
 $upcoming = new WP_Query($args);
 if( $upcoming->have_posts() ) :
