@@ -289,6 +289,7 @@ function todo_restrict_manage_posts() {
                 'taxonomy' => $tax_slug,
                 'name' => $tax_obj->name,
                 'orderby' => 'name',
+                'order'		=> 'desc',
                 'selected' => $_GET[$tax_obj->query_var],
                 'hierarchical' => $tax_obj->hierarchical,
                 'show_count' => false,
