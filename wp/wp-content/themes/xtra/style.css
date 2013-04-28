@@ -240,6 +240,7 @@ nav {
 		}
 	#home-grid {
 		padding-top: 18px;
+		padding-bottom: 18px;
 		position: relative;
 		overflow: hidden;
 		background-image: url('_img/home_bg.gif');
@@ -341,7 +342,7 @@ nav {
 				line-height: 18px;
 				border-bottom: 1px dotted #9C9A93;
 			}
-			iframe { border-bottom: 1px dotted #9C9A93; }
+			iframe { border-bottom: 1px dotted #9C9A93; margin-bottom: 18px; }
 			#mailing {
 				height: 138px;
 				padding-left: 19px;
@@ -375,12 +376,12 @@ nav {
 				}
 				
 
-	.ads {
+	.ads, .featured-ads {
 		overflow: hidden;
   		width: 229px;
-  		border-bottom: 1px dotted #9c9a93;
 	}
-	.ads.ap {
+	.ads.ap, 
+	.featured-ads.ap {
 		overflow: hidden;
   		width: 229px;
   		border-top: 1px dotted #9c9a93;
@@ -388,6 +389,7 @@ nav {
   		margin-left: -10px;
   		margin-top: 20px;
 	}
+	.ads.ap { border-top: none; margin-top: 0; }
 	.ads li {
 		height: 210px;
   		width: 100%;
@@ -407,6 +409,17 @@ nav {
 	.ads li a:hover {
 	  opacity: 0.6;
 	}
+	.featured-ads {
+		height: 208px;
+		border-bottom: 1px dotted #9c9a93;
+	}
+	.featured-ads.ap { border-bottom: none; }
+	.featured-ads li {
+		margin-left: 18px;
+		margin-bottom: 18px;
+	}
+	.featured-ads.ap li { margin-top: 18px; }
+	.featured-ads li a:hover { opacity: 0.6; }
 
 /* ARCHIVE */
 #issue-archive { 

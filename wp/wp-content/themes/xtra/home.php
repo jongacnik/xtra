@@ -229,32 +229,35 @@ $link = get_permalink(); ?>
 		
 
 		<div id="home-right">
-			<ul class="ads">
-				<li>
+			<ul class="featured-ads">
 				<?php
 
 				/* Get ads */
 				$args = array(
-				  'post_type' 			=> 'advertisement',
-				  'post_status' 		=> 'publish',
-				  'posts_per_page' 		=> -1
+				  	'post_type' 		=> 'advertisement',
+				  	'post_status' 		=> 'publish',
+				  	'posts_per_page' 	=> -1,
+				  	'meta_query' 		=> array(
+						array (
+							'key' 		=> 'featured_ad',
+							'value' 	=> '1',
+							'compare' 	=> '=',
+						),
+					),
 				);
 				$ads = new WP_Query($args);
 				if( $ads->have_posts() ) :
-					$count = 0;
 					while ($ads->have_posts()) : $ads->the_post();
-						$img  = get_field('ad_image');
-						$url  = get_field('ad_url');
-						$name = get_the_title(); ?>
-
-					    <?php if($count!=0 && $count%4 == 0) echo '</li><li>'; ?>
-					    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img?>"></a>
-						<?php $count++; ?>
-
+						$imgID = get_field('ad_image');
+						$img   = wp_get_attachment_image_src( $imgID, 'advertisement-feature' );
+						$url   = get_field('ad_url');
+						$name  = get_the_title(); ?>
+					    <li>
+					    	<a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+						</li>
 				  	<?php endwhile; ?>
 				<?php endif; ?>
 				<?php wp_reset_query(); ?>
-				</li>
 			</ul>
 
 			<div id="home-about">
@@ -262,6 +265,40 @@ $link = get_permalink(); ?>
 			</div>
 
 			<iframe src="<?php bloginfo('template_url'); ?>/mailing.php" width="230" height="138" scrolling="no" id="mailingFrame"></iframe>
+
+			<ul class="ads">
+				<li>
+				<?php
+
+				/* Get ads */
+				$args = array(
+					'post_type' 		=> 'advertisement',
+					'post_status' 		=> 'publish',
+					'posts_per_page' 	=> -1,
+					'meta_query' 		=> array(
+						array (
+							'key' 		=> 'featured_ad',
+							'value' 	=> '0',
+							'compare' 	=> '=',
+						),
+					),
+				);
+				$ads = new WP_Query($args);
+				if( $ads->have_posts() ) :
+
+					while ($ads->have_posts()) : $ads->the_post();
+						$imgID = get_field('ad_image');
+						$img   = wp_get_attachment_image_src( $imgID, 'advertisement' );
+						$url   = get_field('ad_url');
+						$name  = get_the_title(); ?>
+
+					    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+
+				  	<?php endwhile; ?>
+				<?php endif; ?>
+				<?php wp_reset_query(); ?>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -271,7 +308,7 @@ $link = get_permalink(); ?>
 	    fx: 'scrollLeft', 
 		speed: 300, 
 	})
-	$('.ads').cycle({
+	$('.featured-ads').cycle({
 		'timeout':5000,
 		'speed': 300
 	})

@@ -422,6 +422,7 @@ add_action( 'right_now_content_table_end', 'my_dash' );
 ////////////////////////
 if ( function_exists( 'add_image_size' ) ) { 
 	add_image_size( 'advertisement', 75, 75, true );
+	add_image_size( 'advertisement-feature', 188, 188, true );
 	add_image_size( 'slider', 700, 427, true );
 	add_image_size( 'artist-banner', 940, 427, true );
 	add_image_size( 'artist-project-image', 1200, 9999, false );

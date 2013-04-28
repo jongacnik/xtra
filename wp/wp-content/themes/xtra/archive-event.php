@@ -157,32 +157,68 @@ wp_reset_query(); ?>
 	} ?>
 		</li>
 	</div>
+	<ul class="featured-ads ap">
+		<?php
+
+		/* Get ads */
+		$args = array(
+		  	'post_type' 		=> 'advertisement',
+		  	'post_status' 		=> 'publish',
+		  	'posts_per_page' 	=> -1,
+		  	'meta_query' 		=> array(
+				array (
+					'key' 		=> 'featured_ad',
+					'value' 	=> '1',
+					'compare' 	=> '=',
+				),
+			),
+		);
+		$ads = new WP_Query($args);
+		if( $ads->have_posts() ) :
+			while ($ads->have_posts()) : $ads->the_post();
+				$imgID = get_field('ad_image');
+				$img   = wp_get_attachment_image_src( $imgID, 'advertisement-feature' );
+				$url   = get_field('ad_url');
+				$name  = get_the_title(); ?>
+			    <li>
+			    	<a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+				</li>
+		  	<?php endwhile; ?>
+		<?php endif; ?>
+		<?php wp_reset_query(); ?>
+	</ul>
 	<ul class="ads ap">
 		<li>
 		<?php
 
 		/* Get ads */
 		$args = array(
-		  'post_type' 			=> 'advertisement',
-		  'post_status' 		=> 'publish',
-		  'posts_per_page' 		=> -1
+			'post_type' 		=> 'advertisement',
+			'post_status' 		=> 'publish',
+			'posts_per_page' 	=> -1,
+			'meta_query' 		=> array(
+				array (
+					'key' 		=> 'featured_ad',
+					'value' 	=> '0',
+					'compare' 	=> '=',
+				),
+			),
 		);
 		$ads = new WP_Query($args);
 		if( $ads->have_posts() ) :
-			$count = 0;
-			while ($ads->have_posts()) : $ads->the_post();
-				$img  = get_field('ad_image');
-				$url  = get_field('ad_url');
-				$name = get_the_title(); ?>
 
-			    <?php if($count!=0 && $count%4 == 0) echo '</li><li>'; ?>
-			    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img?>"></a>
-				<?php $count++; ?>
+			while ($ads->have_posts()) : $ads->the_post();
+				$imgID = get_field('ad_image');
+				$img   = wp_get_attachment_image_src( $imgID, 'advertisement' );
+				$url   = get_field('ad_url');
+				$name  = get_the_title(); ?>
+
+			    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
 
 		  	<?php endwhile; ?>
 		<?php endif; ?>
 		<?php wp_reset_query(); ?>
-		</li>	
+		</li>
 	</ul>
 </div>
 
@@ -191,7 +227,7 @@ wp_reset_query(); ?>
 
 <script>
 $('.page-item-7586').addClass('current_page_item')
-$('.ads').cycle({
+$('.featured-ads').cycle({
 	'timeout':5000,
 	'speed': 300
 })
