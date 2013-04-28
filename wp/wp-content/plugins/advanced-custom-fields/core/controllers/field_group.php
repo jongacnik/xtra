@@ -159,45 +159,53 @@ class acf_field_group
 		}
 		
 		
-		// defaults
-		$location = array(
-		 	'rules'		=>	array(),
-		 	'allorany'	=>	'all', 
-		 );
-		
-		
 		// vars
-		$allorany = get_post_meta($post_id, 'allorany', true);
-		if( $allorany )
-		{
-			$location['allorany'] = $allorany;
-		}
+		$groups = array();
+		$group_no = 0;
 		
 		
-		// get all fields
+		// get all rules
 	 	$rules = get_post_meta($post_id, 'rule', false);
 	 	
-
-	 	if($rules)
+	 	
+	 	if( is_array($rules) )
 	 	{
-	 		
-		 	foreach($rules as $rule)
+		 	foreach( $rules as $rule )
 		 	{
 		 		// if field group was duplicated, it may now be a serialized string!
 		 		$rule = maybe_unserialize($rule);
-		
-		
-		 		$location['rules'][ $rule['order_no'] ] = $rule;
+		 		
+		 		
+			 	// does this rule have a group?
+			 	// + groups were added in 4.0.4
+			 	if( !isset($rule['group_no']) )
+			 	{
+				 	$rule['group_no'] = $group_no;
+				 	
+				 	// sperate groups?
+				 	if( get_post_meta($post_id, 'allorany', true) == 'any' )
+				 	{
+					 	$group_no++;
+				 	}
+			 	}
+			 	
+			 	
+			 	// add to group
+			 	$groups[ $rule['group_no'] ][ $rule['order_no'] ] = $rule;
+			 	
+			 	
+			 	// sort rules
+			 	ksort( $groups[ $rule['group_no'] ] );
+	 	
 		 	}
+		 	
+		 	// sort groups
+			ksort( $groups );
 	 	}
-	 	
-	 	
-	 	// sort
-	 	ksort($location['rules']);
-	 	
+	 		 	
 	 	
 	 	// return fields
-		return $location;
+		return $groups;
 	}
 	
 	
@@ -489,11 +497,12 @@ class acf_field_group
 	*  @created: 23/06/12
 	*/
 	
-	function ajax_render_location($options = array())
+	function ajax_render_location( $options = array() )
 	{
 		// defaults
 		$defaults = array(
-			'key' => null,
+			'group_id' => 0,
+			'rule_id' => 0,
 			'value' => null,
 			'param' => null,
 		);
@@ -517,7 +526,6 @@ class acf_field_group
 		
 		// vars
 		$choices = array();
-		$optgroup = false;
 		
 		
 		// some case's have the same outcome
@@ -539,7 +547,6 @@ class acf_field_group
 			
 			case "page":
 				
-				$optgroup = true;
 				$post_types = get_post_types( array('capability_type'  => 'page') );
 				unset( $post_types['attachment'], $post_types['revision'] , $post_types['nav_menu_item'], $post_types['acf']  );
 				
@@ -623,7 +630,6 @@ class acf_field_group
 			
 			case "post" :
 				
-				$optgroup = true;
 				$post_types = get_post_types( array('capability_type'  => 'post') );
 				unset( $post_types['attachment'], $post_types['revision'] , $post_types['nav_menu_item'], $post_types['acf']  );
 				
@@ -698,7 +704,6 @@ class acf_field_group
 				$choices = array();
 				$simple_value = true;
 				$choices = apply_filters('acf/get_taxonomies_for_select', $choices, $simple_value);
-				$optgroup = true;
 								
 				break;
 			
@@ -746,10 +751,9 @@ class acf_field_group
 		// create field
 		do_action('acf/create_field', array(
 			'type'	=>	'select',
-			'name'	=>	'location[rules][' . $options['key'] . '][value]',
+			'name' => 'location[' . $options['group_id'] . '][' . $options['rule_id'] . '][value]',
 			'value'	=>	$options['value'],
 			'choices' => $choices,
-			'optgroup' => $optgroup,
 		));
 		
 		
@@ -832,8 +836,7 @@ class acf_field_group
 		// vars
 		$dont_delete = array();
 		
-		
-		if( $_POST['fields'] )
+		if( isset($_POST['fields']) && is_array($_POST['fields']) )
 		{
 			$i = -1;
 
@@ -881,35 +884,45 @@ class acf_field_group
 		*  save location rules
 		*/
 		
-		$location = $_POST['location'];
-		update_post_meta($post_id, 'allorany', $location['allorany']);
-		
-		delete_post_meta($post_id, 'rule');
-		if($location['rules'])
+		if( isset($_POST['location']) && is_array($_POST['location']) )
 		{
-			foreach($location['rules'] as $k => $rule)
+			delete_post_meta( $post_id, 'rule' );
+			
+			
+			// clean array keys
+			$_POST['location'] = array_values( $_POST['location'] );
+			foreach( $_POST['location'] as $group_id => $group )
 			{
-				$rule['order_no'] = $k;
-				add_post_meta($post_id, 'rule', $rule);
+				if( is_array($group) )
+				{
+					// clean array keys
+					$group = array_values( $group );
+					foreach( $group as $rule_id => $rule )
+					{
+						$rule['order_no'] = $rule_id;
+						$rule['group_no'] = $group_id;
+						
+
+						add_post_meta( $post_id, 'rule', $rule );
+					}
+				}
 			}
+			
+			unset( $_POST['location'] );
 		}
-		unset( $_POST['location'] );
 		
 		
 		/*
 		*  save options
 		*/
 		
-		$options = array(
-			'position' => 'normal',
-			'layout' => 'default',
-			'hide_on_screen' => array()
-		);
-		$options = array_merge($options, $_POST['options']);
-		
-		update_post_meta($post_id, 'position', $options['position']);
-		update_post_meta($post_id, 'layout', $options['layout']);
-		update_post_meta($post_id, 'hide_on_screen', $options['hide_on_screen']);
+		if( isset($_POST['options']) && is_array($_POST['options']) )
+		{
+			update_post_meta($post_id, 'position', $_POST['options']['position']);
+			update_post_meta($post_id, 'layout', $_POST['options']['layout']);
+			update_post_meta($post_id, 'hide_on_screen', $_POST['options']['hide_on_screen']);
+		}
+
 		
 		unset( $_POST['options'] );
 	

@@ -106,7 +106,7 @@ When Attachments is first activated, a default instance is created titled Attach
 
 #### Disable the Default Instance
 
-If you would like to *disable the default instance* (meta box titled 'Attachments' with a 'Title' and 'Caption' field) add the following to your `wp-config.php`:
+If you would like to *disable the default instance* (meta box titled 'Attachments' with a 'Title' and 'Caption' field) add the following to your `wp-config.php` *before* `require_once(ABSPATH . 'wp-settings.php');`:
 
 ```php
 define( 'ATTACHMENTS_DEFAULT_INSTANCE', false );
@@ -375,7 +375,8 @@ $defaults = array(
       'post_type'     => null,            // (string) search 'any' post type
       'post_id'       => null,            // (int) searching all posts
       'post_status'   => 'publish',       // (string) search only published posts
-      'fields'        => null,            // (string|array) search all fields
+      'fields'        => null,            // (string|array) search all Attachment fields
+      'filetype'      => null,            // (string|array) search all Attachment filetypes
   );
 ```
 
@@ -472,6 +473,18 @@ Attachments uses WordPress' built in Media library for uploads and storage.
 ## Changelog
 
 <dl>
+
+    <dt>3.4.2.1</dt>
+    <dd>Fixed a regression that prevented the <code>type</code> method from returning</dd>
+
+    <dt>3.4.2</dt>
+    <dd>Fixed an issue where the <code>languages</code> directory wouldn't be utilized for l10n</dd>
+    <dd>Search now respects custom <code>meta_key</code></dd>
+    <dd>You can now pass in a <code>filetype</code> parameter when searching to limit results in that way</dd>
+
+    <dt>3.4.1</dt>
+    <dd>Class abstraction and cleanup</dd>
+    <dd>Better support for plugin-created custom image sizes</dd>
 
     <dt>3.4</dt>
     <dd>New filter: <code>attachments_meta_key</code> facilitates using a different meta key for Attachments storage</dd>

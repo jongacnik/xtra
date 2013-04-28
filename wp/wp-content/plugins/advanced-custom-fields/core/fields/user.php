@@ -52,7 +52,7 @@ class acf_field_user extends acf_field
 	*  @return	$value	- the modified value
 	*/
 	
-	function format_value_for_api( $value, $field )
+	function format_value_for_api( $value, $post_id, $field )
 	{
 
 		// format value
@@ -201,7 +201,6 @@ class acf_field_user extends acf_field
 		
 		
 		$field['type'] = 'select';
-		$field['optgroup'] = true; 
 		
 		
 		do_action('acf/create_field', $field);			
@@ -266,7 +265,6 @@ class acf_field_user extends acf_field
 			'type'	=>	'select',
 			'name'	=>	'fields['.$key.'][field_type]',
 			'value'	=>	$field['field_type'],
-			'optgroup' => true,
 			'choices' => array(
 				__("Multiple Values",'acf') => array(
 					//'checkbox' => __('Checkbox', 'acf'),

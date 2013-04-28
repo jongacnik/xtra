@@ -39,9 +39,17 @@ class acf_upgrade
 	
 	function admin_menu()
 	{
+		// dont run on plugin activate!
+		if( isset($_GET['action']) && $_GET['action'] == 'activate-plugin' )
+		{
+			return;
+		}
+		
+		
 		// vars
 		$new_version = apply_filters('acf/get_info', 'version');
 		$old_version = get_option('acf_version', false);
+		
 		
 		if( $new_version != $old_version )
 		{
@@ -51,16 +59,9 @@ class acf_upgrade
 			{
 				// do nothing, this is a fresh install
 			}
-			elseif( $new_version > $old_version )
+			elseif( $old_version < '4.0.0' && $new_version >= '4.0.0')
 			{
-				// this is a newer version (update)
-				$url = admin_url('edit.php?post_type=acf&info=changelog');
-				
-				if( $new_version == '4.0.0' )
-				{
-					$url = admin_url('edit.php?post_type=acf&info=whats-new');
-				}
-				
+				$url = admin_url('edit.php?post_type=acf&info=whats-new');
 				wp_redirect( $url );
 				exit;
 				
