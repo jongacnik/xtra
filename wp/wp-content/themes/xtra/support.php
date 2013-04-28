@@ -51,6 +51,12 @@ Susan Silton, Scott Sing, Howard Singerman, Alex Slade, Jeffrey Spear, Buzz Spec
 Eve Steele, Gloria Sutton, Gail Swanlund, Shirley Tse, Geoffrey Tuck, Matias Viegener, Marnie Weber and Jim Shaw, Jane Weinstock and James Welling,
 Christine Wertheim, Pontus Willfors, Millie Wilson, Carmen Winant, Carlin Wing, Christopher Yin, Patty and Bob Zuber</p>
 
+<h2>Media Partners</h2>
+<p class="partners">
+	<a href="http://hammer.ucla.edu/"><img src="<?php bloginfo('template_url'); ?>/_img/hammer_partner.png"></a>
+	<a href="http://foryourart.com/"><img src="<?php bloginfo('template_url'); ?>/_img/for_your_art.png"></a>
+</p>
+
 <p id="thanks"><b>We also want to thank the Peter Norton Family Foundation, the California Arts Council, 
 <br>and the California Community Foundation for their critical support during X-TRA’s early days.</b></p>
 
