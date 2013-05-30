@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php get_header(); 
+
+//Need to detect if mobile so we link straight to pdf articles
+require('mobileDetect.php'); 
+$detect = new Mobile_Detect(); ?>
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); 
 	$cover  = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' ); $cover = $cover[0];
@@ -61,8 +65,13 @@ endwhile; endif; ?>
 			<span class="meta-caps">Features</span>
 			<?php while ($features->have_posts()) : $features->the_post();
 				$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
-				$author = get_field('author'); ?>
-		    	<li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a><span><?=$author?></span></li>
+				$author = get_field('author');
+				if(get_field('pdf') && $detect->isMobile()){
+					$perma = get_field("pdf_upload");
+				} else {
+					$perma = get_permalink(); 
+				} ?>
+		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><span><?=$author?></span></li>
 		  	<?php endwhile; ?>
 		</ul>
 		<?php endif; ?>
@@ -89,8 +98,13 @@ endwhile; endif; ?>
 			<span class="meta-caps">Reviews</span>
 		  	<?php while ($reviews->have_posts()) : $reviews->the_post();
 				$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
-				$author = get_field('author'); ?>
-		  		<li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a><span><?=$author?></span></li>
+				$author = get_field('author');
+				if(get_field('pdf') && $detect->isMobile()){
+					$perma = get_field("pdf_upload");
+				} else {
+					$perma = get_permalink(); 
+				} ?>
+		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><span><?=$author?></span></li>
 		  	<?php endwhile; ?>
 		  </ul>
 		<?php endif; ?>
@@ -117,8 +131,13 @@ endwhile; endif; ?>
 			<span class="meta-caps">Columns</span>
 		  	<?php while ($columns->have_posts()) : $columns->the_post();
 				$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
-				$author = get_field('author'); ?>
-		  		<li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a><span><?=$author?></span></li>
+				$author = get_field('author');
+				if(get_field('pdf') && $detect->isMobile()){
+					$perma = get_field("pdf_upload");
+				} else {
+					$perma = get_permalink(); 
+				} ?>
+		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><span><?=$author?></span></li>
 			<?php endwhile; ?>
 		</ul>
 		<?php endif; ?>

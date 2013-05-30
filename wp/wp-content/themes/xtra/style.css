@@ -1400,9 +1400,10 @@ nav {
 	margin-top: 70px;
 	line-height: 20px;
 }
-#support-wrap .partners { padding-top: 10px; }
+#support-wrap .partners { padding-top: 24px; }
+#support-wrap .partners img { width: 140px; height: auto; }
 #support-wrap .partners a { border-bottom: none; }
-#support-wrap .partners a:not(:last-child) { margin-right: 12px; }
+#support-wrap .partners a:not(:last-child) { margin-right: 72px; }
 #support-header {
 	width: 100%;
 	float: left;
