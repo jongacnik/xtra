@@ -263,7 +263,7 @@ class acf_location
 		
 		
 		// translate $rule['value']
-		// - this variable will hold the origional post_id, but $options['post_id'] will hold the translated version
+		// - this variable will hold the original post_id, but $options['post_id'] will hold the translated version
 		//if( function_exists('icl_object_id') )
 		//{
 		//	$rule['value'] = icl_object_id( $rule['value'], $options['post_type'], true );
@@ -590,13 +590,15 @@ class acf_location
 	
 	function rule_match_user_type( $match, $rule, $options )
 	{
-		if($rule['operator'] == "==")
+		$user = wp_get_current_user();
+ 
+        if( $rule['operator'] == "==" )
         {
-        	$match = ( current_user_can($rule['value']) );
+            $match = in_array( $rule['value'], $user->roles );
         }
-        elseif($rule['operator'] == "!=")
+        elseif( $rule['operator'] == "!=" )
         {
-        	$match = ( ! current_user_can($rule['value']) );
+            $match = ( ! in_array( $rule['value'], $user->roles ) );
         }
         
         return $match;

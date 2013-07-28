@@ -5,7 +5,7 @@ Plugin URI: http://www.torounit.com
 Description:  Add post archives of custom post type and customizable permalinks.
 Author: Toro_Unit
 Author URI: http://www.torounit.com/plugins/custom-post-type-permalinks/
-Version: 0.9.2
+Version: 0.9.2.1
 Text Domain: cptp
 License: GPL2 or later
 Domain Path: /
@@ -621,7 +621,7 @@ class Custom_Post_Type_Permalinks {
 
 		$post_types = get_post_types( array('_builtin'=>false, 'publicly_queryable'=>true, 'show_ui' => true) );
 		foreach ($post_types as $post_type):
-			if(isset($_POST['submit'])){
+			if(isset($_POST['submit']) and isset($_POST['_wp_http_referer'])){
 				if( strpos($_POST['_wp_http_referer'],'options-permalink.php') !== FALSE ) {
 
 					$structure = trim(esc_attr($_POST[$post_type.'_structure']));#get setting
@@ -690,12 +690,17 @@ class Custom_Post_Type_Permalinks {
 	public function setting_structure_callback_function(  $option  ) {
 		$post_type = str_replace('_structure',"" ,$option);
 		$slug = get_post_type_object($post_type)->rewrite['slug'];
-		if( !$slug )
-			$slug = $post_type;
+		$with_front = get_post_type_object($post_type)->rewrite['with_front'];
 
 		$value = get_option($option);
 		if( !$value )
 			$value = $this->default_structure;
+
+		global $wp_rewrite;
+		$front = substr( $wp_rewrite->front, 1 );
+		if( $front and $with_front ) {
+			$slug = $front.$slug;
+		}
 
 		echo '<code>'.home_url().'/'.$slug.'</code> <input name="'.$option.'" id="'.$option.'" type="text" class="regular-text code" value="' . $value .'" />';
 	}
