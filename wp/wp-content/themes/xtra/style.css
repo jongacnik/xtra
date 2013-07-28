@@ -569,9 +569,9 @@ nav {
 			#art-header h2 i, #artproj-header h2 i,
 			#art-header h2 em, #artproj-header h2 em {
 				font-weight: bold;
-				font-style: normal;
+				font-style: italic;
 				/*font-size: 18px;*/
-				color: #aaa;
+				/*color: #aaa;*/
 				-webkit-font-smoothing: antialiased !important;
 			}
 			#art-author { 
