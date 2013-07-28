@@ -45,7 +45,7 @@ if($id_cb >=2) {
 		$number = $numbers[strtolower($season[0])];?>
 
 		<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-		<br><span class="gothic search-meta">—<?=$issue?> <?=$volume?> <?=$number?></span><br>
+		<br><span class="gothic search-meta">—<?=$season[0]?> <?=$season[1]?> <?=$volume?> <?=$number?></span><br>
 
 	<?php } ?>
 
