@@ -1,18 +1,21 @@
 <?php
-						$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
-						$author = get_field('author');
-						$artist = get_field('artist'); ?>
-<?php $banner = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'artist-banner' ); $banner = $banner[0]; ?>
-<?php $attachments = new Attachments( 'my_attachments' ); ?>
+$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
+$author = get_field('author');
+$artist = get_field('artist');
+$banner = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'artist-banner' ); $banner = $banner[0];
+$attachments = new Attachments( 'my_attachments' ); ?>
 <?php if( $attachments->exist() ) : ?>
 <div id="artist-proj-header">
 	<div id="artproj-banner-hover">View Project</div>
 	<?php $counter = 0; ?>
-    <?php while( $attachments->get() ) : ?>
+    <?php while( $attachments->get() ) : 
+    	$img_src = $attachments->src('artist-project-image');
+    	$img_cpt = $attachments->field( 'title' );
+    ?>
     	<?php if($counter == 0): ?>
-    		<a href="<?php echo $attachments->src('artist-project-image'); ?>" rel="shadowbox[Gallery]"><div id="artproj-banner" style="background-image: url('<?=$banner?>');" class="full-fade"></div></a>
+    		<a href="<?=$img_src?>" rel="shadowbox[Gallery]" rev="<?=$img_cpt?>"><div id="artproj-banner" style="background-image: url('<?=$banner?>');" class="full-fade"></div></a>
     	<?php else: ?>
-    		<a href="<?=$attachments->src('artist-project-image')?>" rel="shadowbox[Gallery]" style="display:none;"></a>
+    		<a href="<?=$img_src?>" rel="shadowbox[Gallery]" rev="<?=$img_cpt?>" style="display:none;"></a>
     	<?php endif; ?>
     	<?php $counter++; ?>
     <?php endwhile; ?>
