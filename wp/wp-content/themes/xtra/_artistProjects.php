@@ -45,7 +45,11 @@ if( $articles->have_posts() ) :
   	
     <div id="artproj-banner-hover">
 		<span class="artprojmeta century"><?=$curr_nm?> <?=$volume?> <?=$number?></span>
-		<br><?=$artist?><br><?php the_title(); ?>
+		<br><?=$artist?><br>
+		<?php 
+		$apName = get_the_title();
+		$apName = strlen($apName) > 17 ? substr( $apName, 0, strrpos( substr( $apName, 0, 17), ' ' ) ).'...' : $apName;
+		echo $apName; ?>
 	</div>
 	<a href="<?php the_permalink() ?>"><div id="artproj-banner" style="background-image: url('<?=$thumb?>');" class="full-fade"></div></a>
 
