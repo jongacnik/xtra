@@ -5,7 +5,7 @@
 	    </div> <!-- /wrapper -->
 	<footer class="padding-fix">
 	    		<p>&#169; <?=date('Y')?> X-TRA Contemporary Art Quarterly</p>
-	    		<p>Designed by <a href="http://takumiakin.com/">Takumi Akin</a>  |  Made by <a href="http://jongacnik.com/">Jon Gacnik</a></p>
+	    		<p>Made by <a href="http://folderstudio.com/">Folder</a></p>
 	    		<a href="<?php bloginfo('url'); ?>" id="footer-link"><img src="<?php bloginfo('template_url'); ?>/_img/logo_footer.png"></a>
 	    		
 	    	</footer>		
