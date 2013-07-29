@@ -16,6 +16,26 @@ $detect = new Mobile_Detect(); ?>
 	$iNum = str_replace('Number ', '', $number);
 	$buyurl = get_field('purchase_url');
 	$issue_name = $post->post_name;
+
+	//Dirty fix to properly number Volume 1
+	$tit = get_the_title();
+	if($tit == 'Spring 1997'){
+		$number = 'Number 1';
+		$iNum = '1';
+	} elseif($tit == 'Summer 1997'){
+		$number = 'Number 2';
+		$iNum = '2';
+	} elseif($tit == 'Fall 1997'){
+		$number = 'Number 3';
+		$iNum = '3';
+	} elseif($tit == 'Winter 1998'){
+		$number = 'Number 4';
+		$iNum = '4';
+	} elseif($tit == 'Summer 1998'){
+		$number = 'Number 5';
+		$iNum = '5';
+	}
+
 endwhile; endif; ?>
 <?php wp_reset_query(); ?>
 
