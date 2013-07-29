@@ -8,7 +8,9 @@ get_header(); ?>
 /* Global goods of current issue */
 $get_current = "SELECT * FROM xtra_posts WHERE post_type='issue' AND post_status='publish' ORDER BY post_date DESC LIMIT 1";
 $get_current = mysql_fetch_assoc(mysql_query($get_current));
-$curr_nm = $get_current['post_title']; ?>
+$curr_nm = $get_current['post_title']; 
+
+?>
 
 <div id="artist-proj-header" class="landing">
 
@@ -48,6 +50,54 @@ if( $articles->have_posts() ) :
 	<a href="<?php the_permalink() ?>"><div id="artproj-banner" style="background-image: url('<?=$thumb?>');" class="full-fade"></div></a>
 
   <?php endwhile; ?>
+
+  <?php else: //If there is no Artist Project for this issue, look to the previous issue
+
+	$curr_ssn = explode(' ', $curr_nm);
+	print_r($curr_ssn[0]);
+	$prev_yr  = $curr_ssn[0] == 'Winter' ? $curr_ssn[1]-1 : $curr_ssn[1];
+	$prev_ssn = array_search($curr_ssn[0], $seasons);
+	$prev_ssn = $prev_ssn == 0 ? $seasons[3] : $seasons[$prev_ssn-1];
+	$prev_nm  = $prev_ssn.' '.$prev_yr;
+
+	wp_reset_query();
+
+  	$args = array(
+	  'issue_taxonomy' 		=> $prev_nm,
+	  'post_type' 			=> 'article',
+	  'post_status' 		=> 'publish',
+	  'posts_per_page' 		=> -1,
+	  'tax_query'			=> array(
+			array(
+	        'taxonomy' 	=> 'artType_taxonomy',
+	        'terms' 	=> 'artist_project',
+	        'field' 	=> 'slug',
+	        'operator'	=> 'IN'
+	        )
+	    )
+	);
+	$articles = new WP_Query($args); 
+	if( $articles->have_posts() ) :
+	  while ($articles->have_posts()) : $articles->the_post();
+		$thumb  = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); $thumb = $thumb[0]; 
+		$volume = wp_get_post_terms( $post->ID, 'volume_taxonomy', array("fields" => "names")); 
+		$volume = str_replace('v', 'Volume ', $volume[0]); 
+		$season = explode(' ', $curr_nm); 
+		$year   = $season[1];
+		$season = $season[0];
+		$number = $numbers[strtolower($season)];
+		$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
+		$author = get_field('author');
+		$artist = get_field('artist'); ?>
+	  	
+	    <div id="artproj-banner-hover">
+			<span class="artprojmeta century"><?=$curr_nm?> <?=$volume?> <?=$number?></span>
+			<br><?=$artist?><br><?php the_title(); ?>
+		</div>
+		<a href="<?php the_permalink() ?>"><div id="artproj-banner" style="background-image: url('<?=$thumb?>');" class="full-fade"></div></a>
+
+	  <?php endwhile; endif; ?>
+
 <?php endif; ?>
 <?php wp_reset_query(); ?>
 

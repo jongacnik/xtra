@@ -525,4 +525,5 @@ $numbers = array(
 	'spring'	=> 'Number 3',
 	'summer'	=> 'Number 4'
 );
+$seasons = array('Fall','Winter','Spring','Summer');
 ?>
