@@ -182,7 +182,7 @@ $link = get_permalink(); ?>
 			
 
 		<div id="home-center">
-			<div class="box-title century"><?=$volume.' '.$issue?></div>
+			<div class="box-title century"><?=$volume.' '.$number?></div>
 			<ul>
 
 				<?php
