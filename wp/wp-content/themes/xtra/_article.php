@@ -35,7 +35,25 @@
 						<span class="meta-caps gothic" id="art-type"><?=$type?></span>
 						
 						<?php if($type=='Review'): ?>
-							<h2><span class="review-title"><?php the_title() ;?></span><br><?php if(!empty($artist)) echo $artist; ?></h2>
+							<span class="review-title"><?php the_title() ;?></span>
+							<?php if(!empty($artist)) echo '<h2 class="revrev">'.$artist.'</h2>'; ?>
+							<?php 
+								$ex1name = get_field('exhibition_name');
+								$ex1loc  = get_field('location');
+								$ex2name = get_field('exhibition_2_name');
+								$ex2loc  = get_field('location_2');
+								$ex3name = get_field('exhibition_3_name');
+								$ex3loc  = get_field('location_3');
+
+								echo '<div class="multi-review">';
+								if(!empty($ex1name)) echo '<h2>'.$ex1name.'</h2>';
+								if(!empty($ex1loc)) echo $ex1loc;
+								if(!empty($ex2name)) echo '<h2>'.$ex2name.'</h2>';
+								if(!empty($ex2loc)) echo $ex2loc;
+								if(!empty($ex3name)) echo '<h2>'.$ex3name.'</h2>';
+								if(!empty($ex3loc)) echo $ex3loc;
+								echo '</div>';
+							?>
 						<?php else: ?>
 							<h2><?php the_title() ;?><br><?php if(!empty($artist)) echo $artist; ?></h2>
 						<?php endif; ?>

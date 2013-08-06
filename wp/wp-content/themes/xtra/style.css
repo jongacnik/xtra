@@ -566,11 +566,13 @@ nav {
 				display: block;
 				margin-bottom: 8px;
 			}
-			#art-header h2 .review-title { 
+			#art-header .review-title { 
 				font-family: 'gothic_720', Arial, sans-serif;
 				font-size: 16px;
+				line-height: 18px !important;
 				font-weight: normal;
 			}
+			#art-header h2.revrev { margin-top: 24px; }
 			#art-header h2 i, #artproj-header h2 i,
 			#art-header h2 em, #artproj-header h2 em {
 				font-weight: bold;
@@ -585,11 +587,16 @@ nav {
 				margin-bottom: 4px;
 			}
 			#art-author:before { content: "\2014"; }
-			#art-city, #art-venue { 
+			#art-city, #art-venue, #art-header .multi-review { 
 				line-height: 18px;
 				display: block;
 				font-family: 'gothic_720', Arial, sans-serif;
 				margin-bottom: 4px;
+			}
+			#art-header .multi-review h2 { 
+				font-family: 'times_bq', times, serif; 
+				line-height: 42px; 
+				margin-top: 24px;
 			}
 			
 		.page img {
