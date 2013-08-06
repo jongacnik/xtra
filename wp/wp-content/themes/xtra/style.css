@@ -566,6 +566,11 @@ nav {
 				display: block;
 				margin-bottom: 8px;
 			}
+			#art-header h2 .review-title { 
+				font-family: 'gothic_720', Arial, sans-serif;
+				font-size: 16px;
+				font-weight: normal;
+			}
 			#art-header h2 i, #artproj-header h2 i,
 			#art-header h2 em, #artproj-header h2 em {
 				font-weight: bold;

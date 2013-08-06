@@ -33,7 +33,13 @@
 				<?php else: ?>
 					<div id="art-header">
 						<span class="meta-caps gothic" id="art-type"><?=$type?></span>
-						<h2><?php the_title() ;?><br><?php if(!empty($artist)) echo $artist; ?></h2>
+						
+						<?php if($type=='Review'): ?>
+							<h2><span class="review-title"><?php the_title() ;?></span><br><?php if(!empty($artist)) echo $artist; ?></h2>
+						<?php else: ?>
+							<h2><?php the_title() ;?><br><?php if(!empty($artist)) echo $artist; ?></h2>
+						<?php endif; ?>
+
 						<?php if(!empty($venue)) echo '<span id="art-venue">'.$venue.'</span>'; ?>
 						<?php if(!empty($city)) echo '<span id="art-city">'.$city.'</span>'; ?>
 						<br><?php if(!empty($author)) echo '<span id="art-author">'.$author.'</span>'; ?>
