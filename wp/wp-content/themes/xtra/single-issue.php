@@ -91,7 +91,7 @@ endwhile; endif; ?>
 				} else {
 					$perma = get_permalink(); 
 				} ?>
-		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><span><?=$author?></span></li>
+		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><?php echo ($author ? '<span>'.$author.'</span>' : ''); ?></li>
 		  	<?php endwhile; ?>
 		</ul>
 		<?php endif; ?>
@@ -124,7 +124,7 @@ endwhile; endif; ?>
 				} else {
 					$perma = get_permalink(); 
 				} ?>
-		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><span><?=$author?></span></li>
+		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><?php echo ($author ? '<span>'.$author.'</span>' : ''); ?></li>
 		  	<?php endwhile; ?>
 		  </ul>
 		<?php endif; ?>
@@ -157,7 +157,7 @@ endwhile; endif; ?>
 				} else {
 					$perma = get_permalink(); 
 				} ?>
-		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><span><?=$author?></span></li>
+		  		<li><a href="<?=$perma?>"><?php the_title(); ?></a><?php echo ($author ? '<span>'.$author.'</span>' : ''); ?></li>
 			<?php endwhile; ?>
 		</ul>
 		<?php endif; ?>
@@ -185,7 +185,7 @@ endwhile; endif; ?>
 			<?php while ($artist_projects->have_posts()) : $artist_projects->the_post();
 				$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
 				$artist = get_field('artist'); ?>
-		  		<li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a><span><?=$artist?></span></li>
+		  		<li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a><?php echo ($artist ? '<span>'.$artist.'</span>' : ''); ?></li>
 		  	<?php endwhile; ?>
 		</ul>
 		<?php endif; ?>
