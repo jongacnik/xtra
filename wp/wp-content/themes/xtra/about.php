@@ -25,6 +25,7 @@ get_header(); ?>
 				<li>Mario Ontiveros</li>
 				<li>Elizabeth Pulsinelli</li>
 				<li>Nizan Shaked</li>
+				<li>Brica Wilcox</li>
 				<li>Damon Willick</li>
 			</ul>
 		</div>
@@ -82,7 +83,7 @@ get_header(); ?>
 					<li>Stephen Berens</li>
 					<li>Ellen Birrell</li>
 					<li>Cay Sophie Rabinowitz</li>
-					<li>Mitchell Syrop</li>
+					
 					<li>Michelle Whiting</li>
 				</ul>
 			</div>
@@ -92,12 +93,14 @@ get_header(); ?>
 		<div class="about-row">
 			<h4>Advisory Council</h4>
 			<ul class="tcol">
+				<li>Phil Aarons</li>
 				<li>Kevin Appel</li>
 				<li>Kafi Blumenfield</li>
 				<li>William Leavitt</li>
 				<li>Sharon Lockhart</li>
 				<li>Clayton Press</li>
 				<li>Eve Steele</li>
+				<li>Mitchell Syrop</li>
 			</ul>
 		</div>
 
@@ -106,9 +109,8 @@ get_header(); ?>
 			<div class="col1">
 				<h4>Interns</h4>
 				<ul>
-					<li>Evan Burrows</li>
-					<li>Kellie Lanham</li>
-					<li>Nina Castro</li>
+					<li>Marisa Keckeisen</li>
+					<li>Val Schub </li>
 				</ul>
 			</div>
 			<div class="col1">
