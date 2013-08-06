@@ -118,7 +118,7 @@ $link = get_permalink(); ?>
 						  while ($events->have_posts()) : $events->the_post();
 						  	$thumb  	= wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); $thumb = $thumb[0];  
 							$eventName	= get_the_title();
-							$eventName = strlen($eventName) > 60 ? substr( $eventName, 0, strrpos( substr( $eventName, 0, 60), ' ' ) ).'...' : $eventName;
+							$eventName = strlen($eventName) > 60 ? substr( $eventName, 0, strrpos( substr( $eventName, 0, 57), ' ' ) ).'...' : $eventName;
 							$eventUrl	= get_permalink();
 							$eventDate  = get_field('EVENT-date'); ?>
 							
@@ -209,7 +209,7 @@ $link = get_permalink(); ?>
 						$type 	= wp_get_post_terms( $post->ID, 'artType_taxonomy', array("fields" => "names")); $type = $type[0];
 						$author = get_field('author');
 						$title = get_the_title();
-						$title = strlen($title) > 60 ? substr( $title, 0, strrpos( substr( $title, 0, 60), ' ' ) ).'...' : $title; ?>
+						$title = strlen($title) > 60 ? substr( $title, 0, strrpos( substr( $title, 0, 57), ' ' ) ).'...' : $title; ?>
 
 					    <li>
 							<a href="<?php the_permalink() ?>" class="home-image fade"><img src="<?=$thumb?>"></a>
