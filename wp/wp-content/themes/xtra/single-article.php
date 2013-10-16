@@ -24,7 +24,22 @@ $year   = $season[1];
 $season = $season[0];
 $number = $numbers[strtolower($season)];
 $buyurl = get_field('purchase_url');
-$link = get_permalink(); ?>
+$link = get_permalink(); 
+
+$tit = get_the_title();
+	if($tit == 'Spring 1997'){
+		$number = 'Number 1';
+	} elseif($tit == 'Summer 1997'){
+		$number = 'Number 2';
+	} elseif($tit == 'Fall 1997'){
+		$number = 'Number 3';
+	} elseif($tit == 'Winter 1998'){
+		$number = 'Number 4';
+	} elseif($tit == 'Summer 1998'){
+		$number = 'Number 5';
+	}
+
+echo $number; ?>
 <?php wp_reset_query(); ?>
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>

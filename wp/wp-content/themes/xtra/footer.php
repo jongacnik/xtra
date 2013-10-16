@@ -6,7 +6,7 @@
 	<footer class="padding-fix">
 	    		<p>&#169; <?=date('Y')?> X-TRA Contemporary Art Quarterly</p>
 	    		<p>Made by <a href="http://folderstudio.com/">Folder</a></p>
-	    		<a href="<?php bloginfo('url'); ?>" id="footer-link"><img src="<?php bloginfo('template_url'); ?>/_img/logo_footer.png"></a>
+	    		<a href="<?php bloginfo('url'); ?>" id="footer-link" target="_blank"><img src="<?php bloginfo('template_url'); ?>/_img/logo_footer.png"></a>
 	    		
 	    	</footer>		
 		<script type="text/javascript">

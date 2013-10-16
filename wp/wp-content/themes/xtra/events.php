@@ -1,2 +1,2 @@
 <?php /* Template Name: Events */ ?>
-<?php header('Location: /wp/events/'); ?>
+<?php header('Location: /site/events/'); ?>

@@ -45,7 +45,9 @@ if( $articles->have_posts() ) :
   	
     <div id="artproj-banner-hover">
 		<span class="artprojmeta century"><?=$curr_nm?> <?=$volume?> <?=$number?></span>
-		<br><?=$artist?><br>
+		<br><?php 
+		$artist = strlen($artist) > 17 ? substr( $artist, 0, strrpos( substr( $artist, 0, 17), ' ' ) ).'...' : $artist;
+		echo $artist; ?><br>
 		<?php 
 		$apName = get_the_title();
 		$apName = strlen($apName) > 17 ? substr( $apName, 0, strrpos( substr( $apName, 0, 17), ' ' ) ).'...' : $apName;
@@ -137,7 +139,25 @@ $artist_projects = new WP_Query($args);
 if( $artist_projects->have_posts() ) :
   while ($artist_projects->have_posts()) : $artist_projects->the_post(); 
 	$artist = get_field('artist'); 
-	$artistSort = explode(' ', $artist); $artistSort = substr(strtoupper($artistSort[1]), 0, 1);
+
+	//some manual alphabetization fixes
+	if($artist == 'Harry Gamboa Jr.'){
+		$artistSort = 'G';
+	} elseif($artist == 'From the Colby Posters Archive') {
+		$artist = 'Colby Posters';
+		$artistSort = 'C';
+	} elseif($artist == 'Justin Beal and Vishal Jugdeo') {
+		$artistSort = 'B';
+	} else { //otherwise just pull the alphabetization from the last name
+		$artistSort = explode(' ', $artist); 
+		if( ctype_alpha(substr($artistSort[count($artistSort)-1], 0, 1)) ){
+			$artistSort = substr(strtoupper($artistSort[count($artistSort)-1]), 0, 1);	
+		} else {
+			$artistSort = substr(strtoupper($artistSort[count($artistSort)-1]), 1, 1);	
+		}
+		
+	}
+	
 	$url	= get_permalink(); 
 
 	$artistInfo = array(
@@ -169,7 +189,7 @@ foreach($alphas as $alpha => $v){
 
 			/* Spit out the list */
 			foreach($alphas as $alpha => $artists){
-				if($alpha == 'H' || $alpha == 'R') echo '</ul><ul class="artists">';
+				if($alpha == 'G' || $alpha == 'P') echo '</ul><ul class="artists">';
 				if(!empty($artists)){ ?>
 					<li><span class="alpha"><?=$alpha?></span>
 						<ul>
@@ -215,7 +235,7 @@ foreach($alphas as $alpha => $v){
 					$url   = get_field('ad_url');
 					$name  = get_the_title(); ?>
 				    <li>
-				    	<a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+				    	<a href="<?=$url?>" title="<?=$name?>" target="_blank"><img src="<?=$img[0]?>"></a>
 					</li>
 			  	<?php endwhile; ?>
 			<?php endif; ?>
@@ -247,7 +267,7 @@ foreach($alphas as $alpha => $v){
 					$url   = get_field('ad_url');
 					$name  = get_the_title(); ?>
 
-				    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+				    <a href="<?=$url?>" title="<?=$name?>" target="_blank"><img src="<?=$img[0]?>"></a>
 
 			  	<?php endwhile; ?>
 			<?php endif; ?>

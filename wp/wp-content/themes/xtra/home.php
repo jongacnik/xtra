@@ -70,7 +70,7 @@ $link = get_permalink(); ?>
 					<a href="<?php the_permalink() ?>"><img src="<?=$thumb?>" class="full-fade"></a>
 					<a href="<?php the_permalink() ?>" class="archive-slider-link">
 						<div class="a-volume a-meta"><?=$vol?></div>
-						<div class="a-date a-meta"><?=$iss?></div>
+						<div class="a-date a-meta"><?=$seas[0].' '.$seas[1]?></div>
 						<div class="a-issue a-meta"><?=$num?><br></div>
 						<div class="a-type a-meta"><?=(get_field('web_only') ? 'Web Only ' : '').$type ?></div>
 						<div class="archive-vertical">
@@ -253,7 +253,7 @@ $link = get_permalink(); ?>
 						$url   = get_field('ad_url');
 						$name  = get_the_title(); ?>
 					    <li>
-					    	<a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+					    	<a href="<?=$url?>" title="<?=$name?>" target="_blank"><img src="<?=$img[0]?>"></a>
 						</li>
 				  	<?php endwhile; ?>
 				<?php endif; ?>
@@ -292,7 +292,7 @@ $link = get_permalink(); ?>
 						$url   = get_field('ad_url');
 						$name  = get_the_title(); ?>
 
-					    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+					    <a href="<?=$url?>" title="<?=$name?>" target="_blank"><img src="<?=$img[0]?>"></a>
 
 				  	<?php endwhile; ?>
 				<?php endif; ?>

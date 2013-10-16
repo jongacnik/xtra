@@ -181,7 +181,7 @@ wp_reset_query(); ?>
 				$url   = get_field('ad_url');
 				$name  = get_the_title(); ?>
 			    <li>
-			    	<a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+			    	<a href="<?=$url?>" title="<?=$name?>" target="_blank"><img src="<?=$img[0]?>"></a>
 				</li>
 		  	<?php endwhile; ?>
 		<?php endif; ?>
@@ -213,7 +213,7 @@ wp_reset_query(); ?>
 				$url   = get_field('ad_url');
 				$name  = get_the_title(); ?>
 
-			    <a href="<?=$url?>" title="<?=$name?>"><img src="<?=$img[0]?>"></a>
+			    <a href="<?=$url?>" title="<?=$name?>" target="_blank"><img src="<?=$img[0]?>"></a>
 
 		  	<?php endwhile; ?>
 		<?php endif; ?>
